@@ -1,14 +1,23 @@
-import { defineConfig } from 'tsup';
+/* eslint-disable no-param-reassign */
+import { Options, defineConfig } from 'tsup';
 
-export default defineConfig({
-  entry: ['src/index.ts'],
-  treeshake: true,
-  sourcemap: 'inline',
+const commonConfig: Options = {
   minify: true,
-  clean: true,
   dts: true,
-  splitting: false,
-  format: ['cjs', 'esm'],
-  external: ['react'],
-  injectStyle: false,
-});
+  format: ['esm', 'cjs'],
+  sourcemap: true,
+  clean: true,
+};
+export default defineConfig([
+  {
+    ...commonConfig,
+    esbuildOptions: (options) => {
+      // Append "use client" to the top of the react entry point
+      options.banner = {
+        js: '"use client";',
+      };
+    },
+    entry: ['src/index.ts'],
+    outDir: 'dist',
+  },
+]);
