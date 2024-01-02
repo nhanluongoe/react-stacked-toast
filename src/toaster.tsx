@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   Toast,
@@ -13,10 +13,7 @@ import {
 import { useToast } from './use-toast';
 
 interface ToasterProps {
-  children?: React.ReactNode;
-  providerProps?: React.ComponentPropsWithoutRef<typeof ToastProvider>;
-  rootProps?: React.ComponentPropsWithoutRef<typeof Toast>;
-  viewportProps?: React.ComponentPropsWithoutRef<typeof ToastViewport>;
+  duration?: number;
 }
 
 const ContentContainer = styled.div`
@@ -25,7 +22,7 @@ const ContentContainer = styled.div`
 `;
 
 export function Toaster(props: ToasterProps) {
-  const { providerProps, viewportProps, rootProps } = props;
+  const { duration = 5 * 1000 } = props;
 
   const { toasts } = useToast();
   const [collapsed, setCollapsed] = useState(true);
@@ -48,16 +45,15 @@ export function Toaster(props: ToasterProps) {
   };
 
   return (
-    <ToastProvider {...providerProps}>
+    <ToastProvider duration={duration}>
       {toasts.map(({ id, title, description, action, ...restProps }, index) => (
         <Toast
           key={id}
-          onMouseEnter={() => handleMouseEnter(id)}
-          onMouseLeave={() => handleMouseLeave(id)}
           {...restProps}
           idx={index}
           collapsed={collapsed.toString()}
-          {...rootProps}
+          onMouseEnter={() => handleMouseEnter(id)}
+          onMouseLeave={() => handleMouseLeave(id)}
         >
           <ContentContainer>
             {title && <ToastTitle>{title}</ToastTitle>}
@@ -67,7 +63,7 @@ export function Toaster(props: ToasterProps) {
           {hovered.includes(id) && <ToastClose />}
         </Toast>
       ))}
-      <ToastViewport {...viewportProps} />
+      <ToastViewport />
     </ToastProvider>
   );
 }

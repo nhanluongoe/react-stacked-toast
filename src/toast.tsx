@@ -105,7 +105,7 @@ const StyledClose = styled(ToastPrimitives.Close)`
   border: none;
   padding: 2px;
   cursor: pointer;
-  color:;
+  color: black;
   transition: opacity 0.2s;
   &:hover {
     color: #e53e3e;
@@ -124,9 +124,8 @@ ToastClose.displayName = ToastPrimitives.Close.displayName;
 const StyledTitle = styled(ToastPrimitives.Title)`
   font-size: 0.875rem;
   font-weight: 600;
-  & + div {
-    font-size: 0.75rem;
-  }
+  color: black;
+  text-align: left;
 `;
 const ToastTitle = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Title>,
@@ -136,11 +135,16 @@ const ToastTitle = React.forwardRef<
 ));
 ToastTitle.displayName = ToastPrimitives.Title.displayName;
 
+const StyledDescription = styled(ToastPrimitives.Description)`
+  color: black;
+  font-size: 0.75rem;
+  text-align: left;
+`;
 const ToastDescription = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Description>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Description>
 >(({ className, ...props }, ref) => (
-  <ToastPrimitives.Description ref={ref} className={className} {...props} />
+  <StyledDescription ref={ref} className={className} {...props} />
 ));
 ToastDescription.displayName = ToastPrimitives.Description.displayName;
 

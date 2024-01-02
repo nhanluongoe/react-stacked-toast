@@ -30,7 +30,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "release": "yarn build && yarn release-it",
-    "link:self": "yarn yalc publish && yarn link"
+    "link:self": "yarn link && yarn link react-stacked-toast"
   },
   "types": "./dist/index.d.ts",
   "exports": {
@@ -120,8 +120,7 @@
     "storybook": "7.6.6",
     "tsup": "8.0.1",
     "typescript": "5.3.3",
-    "vitest": "^1.0.0",
-    "yalc": "1.0.0-pre.53"
+    "vitest": "^1.0.0"
   },
   "peerDependencies": {
     "react": ">=17",
