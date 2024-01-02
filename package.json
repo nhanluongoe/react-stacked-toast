@@ -29,7 +29,8 @@
     "commit": "cz",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "release": "yarn build && yarn release-it"
+    "release": "yarn build && yarn release-it",
+    "link:self": "yarn link && yarn link react-stacked-toast"
   },
   "types": "./dist/index.d.ts",
   "exports": {
