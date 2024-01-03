@@ -38,6 +38,7 @@ module.exports = {
     'no-nested-ternary': 'off',
     'no-plusplus': 'off',
     'no-unused-vars': 'off',
+    'consistent-return': 'off',
     'no-use-before-define': 'off',
     'prettier/prettier': 'error',
     'react/destructuring-assignment': 'off',
