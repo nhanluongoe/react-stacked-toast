@@ -1,8 +1,6 @@
 import React from 'react';
 import { Toast } from './types';
 
-const TOAST_LIMIT = 3;
-
 type ActionType = {
   ADD_TOAST: 'ADD_TOAST';
   REMOVE_TOAST: 'REMOVE_TOAST';
@@ -27,7 +25,26 @@ interface State {
   toasts: Toast[];
 }
 
-export const TOAST_EXPIRE_DISMISS_DELAY = 0;
+const toastTimeouts = new Map<Toast['id'], ReturnType<typeof setTimeout>>();
+
+export const TOAST_EXPIRE_DISMISS_DELAY = 10;
+const TOAST_LIMIT = 3;
+
+const addToRemoveQueue = (toastId: string) => {
+  if (toastTimeouts.has(toastId)) {
+    return;
+  }
+
+  const timeout = setTimeout(() => {
+    toastTimeouts.delete(toastId);
+    dispatch({
+      type: 'REMOVE_TOAST',
+      toastId,
+    });
+  }, TOAST_EXPIRE_DISMISS_DELAY);
+
+  toastTimeouts.set(toastId, timeout);
+};
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -39,6 +56,30 @@ export const reducer = (state: State, action: Action): State => {
     }
 
     case 'DISMISS_TOAST': {
+      const { toastId } = action;
+
+      // ! Side effects ! - This could be execrated into a dismissToast() action, but I'll keep it here for simplicity
+      if (toastId) {
+        addToRemoveQueue(toastId);
+      } else {
+        state.toasts.forEach((toast) => {
+          addToRemoveQueue(toast.id);
+        });
+      }
+
+      return {
+        ...state,
+        toasts: state.toasts.map((t) =>
+          t.id === toastId || toastId === undefined
+            ? {
+                ...t,
+                visible: false,
+              }
+            : t
+        ),
+      };
+    }
+    case 'REMOVE_TOAST': {
       const { toastId } = action;
 
       if (toastId === undefined) {

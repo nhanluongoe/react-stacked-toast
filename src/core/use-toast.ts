@@ -11,6 +11,7 @@ function createToast(
   return {
     type,
     createdAt: Date.now(),
+    visible: true,
     ...opts,
     id: opts.id || genId(),
   };
@@ -29,7 +30,8 @@ function createHandler(type?: ToasterType) {
 
 const toast = (opts: ToastOptionsWithoutType) => createHandler('default')(opts);
 toast.error = (opts: ToastOptionsWithoutType) => createHandler('error')(opts);
-toast.error = (opts: ToastOptionsWithoutType) => createHandler('success')(opts);
+toast.success = (opts: ToastOptionsWithoutType) =>
+  createHandler('success')(opts);
 
 toast.dismiss = (toastId?: string) => {
   dispatch({
@@ -53,15 +55,18 @@ function useToast() {
         (t.duration || DEFAULT_DURATION) - (Date.now() - t.createdAt);
 
       if (actualDuration <= 0) {
-        toast.dismiss(t.id);
+        if (t.visible) {
+          toast.dismiss(t.id);
+        }
         return;
       }
 
       return setTimeout(() => toast.dismiss(t.id), actualDuration);
     });
 
-    return () =>
+    return () => {
       timeouts.forEach((timeout) => timeout && clearTimeout(timeout));
+    };
   }, [toasts]);
 
   return {

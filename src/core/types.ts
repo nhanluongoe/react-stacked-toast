@@ -6,6 +6,7 @@ export type Toast = {
   id: string;
   type: ToasterType;
   createdAt: number;
+  visible: boolean;
   description?: React.ReactNode;
   title?: React.ReactNode;
   icon?: React.ReactNode;
