@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import {
   Toast,
   ToastClose,
@@ -15,11 +14,6 @@ import { useToast } from './use-toast';
 interface ToasterProps {
   duration?: number;
 }
-
-const ContentContainer = styled.div`
-  display: grid;
-  gap: 0.25rem;
-`;
 
 export function Toaster(props: ToasterProps) {
   const { duration = 5 * 1000 } = props;
@@ -55,10 +49,15 @@ export function Toaster(props: ToasterProps) {
           onMouseEnter={() => handleMouseEnter(id)}
           onMouseLeave={() => handleMouseLeave(id)}
         >
-          <ContentContainer>
+          <div
+            style={{
+              display: 'grid',
+              gap: '0.25rem',
+            }}
+          >
             {title && <ToastTitle>{title}</ToastTitle>}
             {description && <ToastDescription>{description}</ToastDescription>}
-          </ContentContainer>
+          </div>
           {action}
           {hovered.includes(id) && <ToastClose />}
         </Toast>
