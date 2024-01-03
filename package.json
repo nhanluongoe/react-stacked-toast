@@ -132,8 +132,5 @@
     "yaml": ">=2.2.2",
     "styled-components": "^5"
   },
-  "dependencies": {
-    "@radix-ui/react-icons": "^1.3.0",
-    "@radix-ui/react-toast": "^1.1.5"
-  }
+  "dependencies": {}
 }
