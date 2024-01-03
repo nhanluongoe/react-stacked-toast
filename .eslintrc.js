@@ -34,6 +34,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off',
     'import/prefer-default-export': 'off',
+    'default-param-last': 'off',
     'no-nested-ternary': 'off',
     'no-plusplus': 'off',
     'no-unused-vars': 'off',
@@ -45,17 +46,8 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/require-default-props': 'off',
     'react/react-in-jsx-scope': 'off',
-    'typescript-sort-keys/interface': 'error',
-    'typescript-sort-keys/string-enum': 'error',
     'unused-imports/no-unused-imports': 'error',
-    'prefer-arrow/prefer-arrow-functions': [
-      'error',
-      {
-        disallowPrototype: true,
-        singleReturnOnly: true,
-        classPropertiesAllowed: false,
-      },
-    ],
+    'prefer-arrow/prefer-arrow-functions': 'off',
     'sort-class-members/sort-class-members': [
       'error',
       {
