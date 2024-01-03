@@ -1,12 +1,11 @@
 // Inspired by react-hot-toast library
 import * as React from 'react';
-import { ToastActionElement, ToastProps } from './toast';
+import { ToastProps } from '../components/toast';
 
-const TOAST_LIMIT = 5;
+const TOAST_LIMIT = 3;
 const TOAST_REMOVE_DELAY = 0;
 
 type ToasterToast = ToastProps & {
-  action?: ToastActionElement;
   description?: React.ReactNode;
   id: string;
   title?: React.ReactNode;
@@ -154,9 +153,9 @@ function toast({ ...props }: Toast) {
       ...props,
       id,
       open: true,
-      onOpenChange: (open) => {
-        if (!open) dismiss();
-      },
+      // onOpenChange: (open) => {
+      //   if (!open) dismiss();
+      // },
     },
   });
 
