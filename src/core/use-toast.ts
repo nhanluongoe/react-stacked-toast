@@ -1,11 +1,6 @@
 // Inspired by react-hot-toast library
 import * as React from 'react';
-import {
-  Toast,
-  ToastOptions,
-  ToastOptionsWithoutType,
-  ToasterType,
-} from './types';
+import { Toast, ToastOptionsWithoutType, ToasterType } from './types';
 import { genId } from './utils';
 
 const TOAST_LIMIT = 3;
@@ -34,20 +29,34 @@ interface State {
   toasts: Toast[];
 }
 
+const toastTimeouts = new Map<Toast['id'], ReturnType<typeof setTimeout>>();
+
+export const TOAST_EXPIRE_DISMISS_DELAY = 1000;
+
 const addToRemoveQueue = (toastId: string) => {
-  dispatch({
-    type: 'REMOVE_TOAST',
-    toastId,
-  });
+  if (toastTimeouts.has(toastId)) {
+    return;
+  }
+
+  const timeout = setTimeout(() => {
+    toastTimeouts.delete(toastId);
+    dispatch({
+      type: 'REMOVE_TOAST',
+      toastId,
+    });
+  }, TOAST_EXPIRE_DISMISS_DELAY);
+
+  toastTimeouts.set(toastId, timeout);
 };
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case 'ADD_TOAST':
+    case 'ADD_TOAST': {
       return {
         ...state,
         toasts: [action.toast, ...state.toasts].slice(0, TOAST_LIMIT),
       };
+    }
 
     case 'DISMISS_TOAST': {
       const { toastId } = action;
@@ -68,14 +77,15 @@ export const reducer = (state: State, action: Action): State => {
           t.id === toastId || toastId === undefined
             ? {
                 ...t,
-                open: false,
               }
             : t
         ),
       };
     }
-    case 'REMOVE_TOAST':
-      if (action.toastId === undefined) {
+    case 'REMOVE_TOAST': {
+      const { toastId } = action;
+
+      if (toastId === undefined) {
         return {
           ...state,
           toasts: [],
@@ -83,8 +93,9 @@ export const reducer = (state: State, action: Action): State => {
       }
       return {
         ...state,
-        toasts: state.toasts.filter((t) => t.id !== action.toastId),
+        toasts: state.toasts.filter((t) => t.id !== toastId),
       };
+    }
     default:
       return state;
   }
@@ -101,9 +112,13 @@ function dispatch(action: Action) {
   });
 }
 
-function createToast(type: ToasterType = 'default', opts: ToastOptions): Toast {
+function createToast(
+  type: ToasterType = 'default',
+  opts: ToastOptionsWithoutType
+): Toast {
   return {
     type,
+    createdAt: Date.now(),
     ...opts,
     id: opts.id || genId(),
   };
@@ -124,6 +139,15 @@ const toast = (opts: ToastOptionsWithoutType) => createHandler('default')(opts);
 toast.error = (opts: ToastOptionsWithoutType) => createHandler('error')(opts);
 toast.error = (opts: ToastOptionsWithoutType) => createHandler('success')(opts);
 
+toast.dismiss = (toastId?: string) => {
+  dispatch({
+    type: 'DISMISS_TOAST',
+    toastId,
+  });
+};
+
+const DEFAULT_DURATION = 5000;
+
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState);
 
@@ -137,10 +161,31 @@ function useToast() {
     };
   }, [state]);
 
+  React.useEffect(() => {
+    const timeouts = state.toasts.map((t) => {
+      if (t.duration === Infinity) {
+        return;
+      }
+
+      const actualDuration =
+        (t.duration || DEFAULT_DURATION) - (Date.now() - t.createdAt);
+
+      if (actualDuration <= 0) {
+        toast.dismiss(t.id);
+        return;
+      }
+
+      return setTimeout(() => toast.dismiss(t.id), actualDuration);
+    });
+
+    return () =>
+      timeouts.forEach((timeout) => timeout && clearTimeout(timeout));
+  }, [state.toasts]);
+
   return {
     ...state,
     toast,
-    dismiss: (toastId?: string) => dispatch({ type: 'DISMISS_TOAST', toastId }),
+    dismiss: toast.dismiss,
   };
 }
 
