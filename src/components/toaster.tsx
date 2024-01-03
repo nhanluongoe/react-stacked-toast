@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Toast, ToastViewport } from './toast';
 import { useToast } from '../core/use-toast';
+import ToastIcon from './toast-icon';
 
 export function Toaster() {
   const { toasts } = useToast();
@@ -24,10 +25,9 @@ export function Toaster() {
 
   return (
     <ToastViewport>
-      {toasts.map(({ id, title, description, ...restProps }, index) => (
+      {toasts.map(({ id, title, description, type, icon }, index) => (
         <Toast
           key={id}
-          {...restProps}
           idx={index}
           collapsed={collapsed.toString()}
           onMouseEnter={handleMouseEnter}
@@ -35,36 +35,42 @@ export function Toaster() {
         >
           <div
             style={{
-              display: 'grid',
-              gap: '0.25rem',
+              display: 'flex',
+              gap: '0.5rem',
+              alignItems: 'center',
             }}
           >
-            {title && (
-              <p
-                style={{
-                  fontSize: '0.875rem',
-                  fontWeight: 600,
-                  color: 'black',
-                  textAlign: 'left',
-                  margin: 0,
-                }}
-              >
-                {title}
-              </p>
-            )}
+            <div>
+              <ToastIcon type={type} icon={icon} />
+            </div>
 
-            {description && (
-              <p
-                style={{
-                  color: 'black',
-                  fontSize: '0.75rem',
-                  textAlign: 'left',
-                  margin: 0,
-                }}
-              >
-                {description}
-              </p>
-            )}
+            <div>
+              {title && (
+                <p
+                  style={{
+                    fontSize: '0.875rem',
+                    fontWeight: 600,
+                    color: 'black',
+                    textAlign: 'left',
+                    margin: 0,
+                  }}
+                >
+                  {title}
+                </p>
+              )}
+              {description && (
+                <p
+                  style={{
+                    color: 'black',
+                    fontSize: '0.75rem',
+                    textAlign: 'left',
+                    margin: 0,
+                  }}
+                >
+                  {description}
+                </p>
+              )}
+            </div>
           </div>
         </Toast>
       ))}

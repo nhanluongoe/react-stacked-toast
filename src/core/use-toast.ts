@@ -1,6 +1,11 @@
 // Inspired by react-hot-toast library
 import * as React from 'react';
-import { Toast, ToastOptions, ToasterType } from './types';
+import {
+  Toast,
+  ToastOptions,
+  ToastOptionsWithoutType,
+  ToasterType,
+} from './types';
 import { genId } from './utils';
 
 const TOAST_LIMIT = 3;
@@ -105,7 +110,7 @@ function createToast(type: ToasterType = 'default', opts: ToastOptions): Toast {
 }
 
 function createHandler(type?: ToasterType) {
-  return (options: ToastOptions) => {
+  return (options: ToastOptionsWithoutType) => {
     const toast = createToast(type, options);
     dispatch({
       type: 'ADD_TOAST',
@@ -115,7 +120,9 @@ function createHandler(type?: ToasterType) {
   };
 }
 
-const toast = (opts: ToastOptions) => createHandler('default')(opts);
+const toast = (opts: ToastOptionsWithoutType) => createHandler('default')(opts);
+toast.error = (opts: ToastOptionsWithoutType) => createHandler('error')(opts);
+toast.error = (opts: ToastOptionsWithoutType) => createHandler('success')(opts);
 
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState);
@@ -137,4 +144,4 @@ function useToast() {
   };
 }
 
-export { useToast, toast };
+export { toast, useToast };
