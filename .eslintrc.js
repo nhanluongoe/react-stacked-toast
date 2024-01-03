@@ -72,5 +72,6 @@ module.exports = {
       },
     ],
     'react/prop-types': 'off', // Disable react/prop-types rule
+    'arrow-body-style': 'off', // Disable arrow-body-style rule
   },
 };
