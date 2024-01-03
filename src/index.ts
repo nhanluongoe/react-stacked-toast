@@ -1,3 +1,3 @@
-export * from './toast';
+export * from './components/toast';
 export * from './components/toaster';
-export * from './use-toast';
+export * from './core/use-toast';
