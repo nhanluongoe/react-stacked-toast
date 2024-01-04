@@ -45,14 +45,11 @@ export function Toaster(props: ToasterProps) {
           <div
             style={{
               display: 'flex',
-              gap: '0.5rem',
+              gap: '1rem',
               alignItems: 'center',
             }}
           >
-            <div>
-              <ToastIcon type={type} icon={icon} />
-            </div>
-
+            <ToastIcon type={type} icon={icon} />
             <div>
               {title && <ToastTitle>{title}</ToastTitle>}
               {description && (
