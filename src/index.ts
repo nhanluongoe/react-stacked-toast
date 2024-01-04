@@ -1,4 +1,3 @@
-// export * from './Example';
-export * from './toast';
-export * from './toaster';
-export * from './use-toast';
+export * from './components/toast';
+export * from './components/toaster';
+export * from './core/use-toast';
