@@ -1,8 +1,6 @@
-'use client';
-
 import { useEffect, useState } from 'react';
-import { Toast, ToastViewport } from './toast';
 import { pause, resume, useToast } from '../core/use-toast';
+import { Toast, ToastDescription, ToastTitle, ToastViewport } from './toast';
 import ToastIcon from './toast-icon';
 
 interface ToasterProps {
@@ -51,30 +49,9 @@ export function Toaster(props: ToasterProps) {
             </div>
 
             <div>
-              {title && (
-                <p
-                  style={{
-                    fontSize: '0.875rem',
-                    fontWeight: 600,
-                    color: 'black',
-                    textAlign: 'left',
-                    margin: 0,
-                  }}
-                >
-                  {title}
-                </p>
-              )}
+              {title && <ToastTitle>{title}</ToastTitle>}
               {description && (
-                <p
-                  style={{
-                    color: 'black',
-                    fontSize: '0.75rem',
-                    textAlign: 'left',
-                    margin: 0,
-                  }}
-                >
-                  {description}
-                </p>
+                <ToastDescription>{description}</ToastDescription>
               )}
             </div>
           </div>

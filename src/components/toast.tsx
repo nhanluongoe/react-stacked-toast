@@ -80,6 +80,31 @@ const Toast = (
 };
 Toast.displayName = 'Toast';
 
-type ToastProps = React.ComponentPropsWithoutRef<typeof Toast>;
+const ToastTitle = (props: React.HTMLProps<HTMLParagraphElement>) => (
+  <p
+    style={{
+      fontSize: '0.875rem',
+      fontWeight: 600,
+      color: 'black',
+      textAlign: 'left',
+      margin: 0,
+    }}
+    {...props}
+  />
+);
+ToastTitle.displayName = 'ToastTitle';
 
-export { Toast, ToastViewport, type ToastProps };
+const ToastDescription = (props: React.HTMLProps<HTMLParagraphElement>) => (
+  <p
+    style={{
+      fontSize: '0.75rem',
+      color: 'black',
+      textAlign: 'left',
+      margin: 0,
+    }}
+    {...props}
+  />
+);
+ToastDescription.displayName = 'ToastDescription';
+
+export { Toast, ToastTitle, ToastDescription, ToastViewport };
