@@ -48,7 +48,7 @@ ToastViewport.displayName = 'ToastViewport';
 const Toast: React.FC<
   HTMLProps<HTMLLIElement> & { collapsed?: string; idx?: number }
 > = (props) => {
-  const { collapsed, idx, ...restProps } = props;
+  const { collapsed, idx, style, ...restProps } = props;
   const transformValue =
     collapsed === 'true'
       ? `scaleX(${1 - idx! * 0.05}) translateY(${-idx! * 95}%)`
@@ -70,6 +70,7 @@ const Toast: React.FC<
         borderRadius: '8px',
         padding: '16px',
         marginBottom: '8px',
+        ...style,
       }}
       {...restProps}
     />

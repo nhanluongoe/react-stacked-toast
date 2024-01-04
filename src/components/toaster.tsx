@@ -35,8 +35,13 @@ export function Toaster(props: ToasterProps) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {toasts.map(({ id, title, description, type, icon }, index) => (
-        <Toast key={id} idx={index} collapsed={collapsed.toString()}>
+      {toasts.map(({ id, title, description, type, icon, style }, index) => (
+        <Toast
+          key={id}
+          idx={index}
+          collapsed={collapsed.toString()}
+          style={style}
+        >
           <div
             style={{
               display: 'flex',
