@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { CSSProperties, HTMLProps } from 'react';
 
 interface ToastViewportProps {
   position: 'left' | 'center' | 'right';
@@ -6,16 +6,16 @@ interface ToastViewportProps {
 
 function calculatePosition(
   position: ToastViewportProps['position']
-): React.CSSProperties {
+): CSSProperties {
   if (position === 'left') {
     return {
-      left: '32px',
+      left: '16px',
     };
   }
 
   if (position === 'right') {
     return {
-      right: '32px',
+      right: '16px',
     };
   }
 
@@ -25,16 +25,16 @@ function calculatePosition(
   };
 }
 
-const ToastViewport = (
-  props: ToastViewportProps & React.HTMLProps<HTMLUListElement>
-) => (
+const ToastViewport: React.FC<
+  ToastViewportProps & HTMLProps<HTMLUListElement>
+> = (props) => (
   <ul
     style={{
       position: 'fixed',
       zIndex: 3600,
       display: 'flex',
       maxHeight: '100vh',
-      padding: '16px',
+      padding: '8px',
       top: '8px',
       ...calculatePosition(props.position),
       flexDirection: 'column',
@@ -45,47 +45,44 @@ const ToastViewport = (
 );
 ToastViewport.displayName = 'ToastViewport';
 
-const Toast = (
-  props: React.HTMLProps<HTMLLIElement> & {
-    collapsed?: string;
-    idx?: number;
-  }
-) => {
+const Toast: React.FC<
+  HTMLProps<HTMLLIElement> & { collapsed?: string; idx?: number }
+> = (props) => {
+  const { collapsed, idx, ...restProps } = props;
+  const transformValue =
+    collapsed === 'true'
+      ? `scaleX(${1 - idx! * 0.05}) translateY(${-idx! * 95}%)`
+      : 'none';
+
   return (
     <li
       style={{
-        zIndex: 5500 - props.idx!,
+        zIndex: 5500 - idx!,
         display: 'flex',
         position: 'relative',
         justifyContent: 'space-between',
         width: 'content-fit',
-        maxWidth: '560px',
-        minWidth: '300px',
-        transform:
-          props.collapsed === 'true'
-            ? `scaleX(${1 - props.idx! * 0.05}) translateY(${
-                -props.idx! * 95
-              }%)`
-            : 'none',
+        transform: transformValue,
         transition: 'transform 0.35s cubic-bezier(.06,.71,.55,1)',
         boxShadow: '2px 2px 6px rgba(0, 0, 0, 0.2)',
-        background: 'white',
+        background: '#fff',
+        color: '#363636',
         borderRadius: '8px',
         padding: '16px',
         marginBottom: '8px',
       }}
-      {...props}
+      {...restProps}
     />
   );
 };
 Toast.displayName = 'Toast';
 
-const ToastTitle = (props: React.HTMLProps<HTMLParagraphElement>) => (
+const ToastTitle: React.FC<HTMLProps<HTMLParagraphElement>> = (props) => (
   <p
     style={{
       fontSize: '0.875rem',
       fontWeight: 600,
-      color: 'black',
+      color: 'inherit',
       textAlign: 'left',
       margin: 0,
     }}
@@ -94,11 +91,11 @@ const ToastTitle = (props: React.HTMLProps<HTMLParagraphElement>) => (
 );
 ToastTitle.displayName = 'ToastTitle';
 
-const ToastDescription = (props: React.HTMLProps<HTMLParagraphElement>) => (
+const ToastDescription: React.FC<HTMLProps<HTMLParagraphElement>> = (props) => (
   <p
     style={{
       fontSize: '0.75rem',
-      color: 'black',
+      color: 'inherit',
       textAlign: 'left',
       margin: 0,
     }}
