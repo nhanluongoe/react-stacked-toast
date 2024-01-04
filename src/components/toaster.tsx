@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Toast, ToastViewport } from './toast';
-import { useToast } from '../core/use-toast';
+import { pause, resume, useToast } from '../core/use-toast';
 import ToastIcon from './toast-icon';
 
 export function Toaster() {
@@ -16,23 +16,22 @@ export function Toaster() {
   }, [toasts]);
 
   const handleMouseEnter = () => {
+    pause();
     setCollapsed(false);
   };
 
   const handleMouseLeave = () => {
+    resume();
     setCollapsed(true);
   };
 
   return (
-    <ToastViewport>
+    <ToastViewport
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       {toasts.map(({ id, title, description, type, icon }, index) => (
-        <Toast
-          key={id}
-          idx={index}
-          collapsed={collapsed.toString()}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
+        <Toast key={id} idx={index} collapsed={collapsed.toString()}>
           <div
             style={{
               display: 'flex',

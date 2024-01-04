@@ -5,6 +5,8 @@ type ActionType = {
   ADD_TOAST: 'ADD_TOAST';
   REMOVE_TOAST: 'REMOVE_TOAST';
   DISMISS_TOAST: 'DISMISS_TOAST';
+  PAUSE: 'PAUSE';
+  RESUME: 'RESUME';
 };
 
 type Action =
@@ -19,10 +21,20 @@ type Action =
   | {
       toastId?: Toast['id'];
       type: ActionType['REMOVE_TOAST'];
+    }
+  | {
+      type: ActionType['PAUSE'];
+      time: number;
+    }
+  | {
+      type: ActionType['RESUME'];
+      time: number;
     };
 
 interface State {
   toasts: Toast[];
+  pausedAt: number | undefined;
+  pauseDuration: number | undefined;
 }
 
 const toastTimeouts = new Map<Toast['id'], ReturnType<typeof setTimeout>>();
@@ -79,6 +91,7 @@ export const reducer = (state: State, action: Action): State => {
         ),
       };
     }
+
     case 'REMOVE_TOAST': {
       const { toastId } = action;
 
@@ -93,6 +106,23 @@ export const reducer = (state: State, action: Action): State => {
         toasts: state.toasts.filter((t) => t.id !== toastId),
       };
     }
+
+    case 'PAUSE': {
+      return {
+        ...state,
+        pausedAt: action.time,
+      };
+    }
+
+    case 'RESUME': {
+      const pauseDuration = action.time - (state.pausedAt || 0);
+      return {
+        ...state,
+        pausedAt: undefined,
+        pauseDuration,
+      };
+    }
+
     default:
       return state;
   }
@@ -100,7 +130,11 @@ export const reducer = (state: State, action: Action): State => {
 
 const listeners: Array<(state: State) => void> = [];
 
-let memoryState: State = { toasts: [] };
+let memoryState: State = {
+  toasts: [],
+  pausedAt: undefined,
+  pauseDuration: undefined,
+};
 
 export function dispatch(action: Action) {
   memoryState = reducer(memoryState, action);
@@ -123,6 +157,6 @@ export const useStore = () => {
   }, [state]);
 
   return {
-    toasts: state.toasts,
+    ...state,
   };
 };

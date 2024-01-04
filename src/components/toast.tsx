@@ -1,10 +1,6 @@
 import * as React from 'react';
 
-interface ToastViewportProps {
-  children?: React.ReactNode;
-}
-
-const ToastViewport = ({ children }: ToastViewportProps) => (
+const ToastViewport = (props: React.HTMLProps<HTMLUListElement>) => (
   <ul
     style={{
       position: 'fixed',
@@ -17,9 +13,8 @@ const ToastViewport = ({ children }: ToastViewportProps) => (
       flexDirection: 'column',
       maxWidth: '420px',
     }}
-  >
-    {children}
-  </ul>
+    {...props}
+  />
 );
 ToastViewport.displayName = 'ToastViewport';
 

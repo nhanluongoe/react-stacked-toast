@@ -40,34 +40,56 @@ toast.dismiss = (toastId?: string) => {
   });
 };
 
-const DEFAULT_DURATION = 3000;
+const DEFAULT_DURATION = 1000;
+
+const pause = () => {
+  dispatch({
+    type: 'PAUSE',
+    time: Date.now(),
+  });
+};
+
+const resume = () => {
+  dispatch({
+    type: 'RESUME',
+    time: Date.now(),
+  });
+};
 
 function useToast() {
-  const { toasts } = useStore();
+  const { toasts, pausedAt, pauseDuration } = useStore();
 
   React.useEffect(() => {
     const timeouts = toasts.map((t) => {
+      if (pausedAt) {
+        return;
+      }
+
       if (t.duration === Infinity) {
         return;
       }
 
-      const actualDuration =
-        (t.duration || DEFAULT_DURATION) - (Date.now() - t.createdAt);
+      const durationLeft =
+        (t.duration || DEFAULT_DURATION) +
+        (pauseDuration || 0) -
+        (Date.now() - t.createdAt);
 
-      if (actualDuration <= 0) {
+      if (durationLeft <= 0) {
         if (t.visible) {
           toast.dismiss(t.id);
         }
         return;
       }
 
-      return setTimeout(() => toast.dismiss(t.id), actualDuration);
+      return setTimeout(() => {
+        toast.dismiss(t.id);
+      }, durationLeft);
     });
 
     return () => {
       timeouts.forEach((timeout) => timeout && clearTimeout(timeout));
     };
-  }, [toasts]);
+  }, [toasts, pausedAt, pauseDuration]);
 
   return {
     toasts,
@@ -76,4 +98,4 @@ function useToast() {
   };
 }
 
-export { toast, useToast };
+export { toast, useToast, pause, resume };
