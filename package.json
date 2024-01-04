@@ -129,8 +129,9 @@
     "semver": ">=7.5.2",
     "trim": ">=0.0.3",
     "trim-newlines": ">=3.0.1",
-    "yaml": ">=2.2.2",
-    "styled-components": "^5"
+    "yaml": ">=2.2.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "goober": "^2.1.13"
+  }
 }
