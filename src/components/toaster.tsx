@@ -5,7 +5,13 @@ import { Toast, ToastViewport } from './toast';
 import { pause, resume, useToast } from '../core/use-toast';
 import ToastIcon from './toast-icon';
 
-export function Toaster() {
+interface ToasterProps {
+  position?: 'left' | 'center' | 'right';
+}
+
+export function Toaster(props: ToasterProps) {
+  const { position = 'right' } = props;
+
   const { toasts } = useToast();
   const [collapsed, setCollapsed] = useState(true);
 
@@ -27,6 +33,7 @@ export function Toaster() {
 
   return (
     <ToastViewport
+      position={position}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

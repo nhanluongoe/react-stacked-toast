@@ -1,15 +1,42 @@
 import * as React from 'react';
 
-const ToastViewport = (props: React.HTMLProps<HTMLUListElement>) => (
+interface ToastViewportProps {
+  position: 'left' | 'center' | 'right';
+}
+
+function calculatePosition(
+  position: ToastViewportProps['position']
+): React.CSSProperties {
+  if (position === 'left') {
+    return {
+      left: '32px',
+    };
+  }
+
+  if (position === 'right') {
+    return {
+      right: '32px',
+    };
+  }
+
+  return {
+    left: '50%',
+    transform: 'translateX(-50%)',
+  };
+}
+
+const ToastViewport = (
+  props: ToastViewportProps & React.HTMLProps<HTMLUListElement>
+) => (
   <ul
     style={{
       position: 'fixed',
-      zIndex: 100,
+      zIndex: 3600,
       display: 'flex',
       maxHeight: '100vh',
       padding: '16px',
-      right: '32px',
-      top: '16px',
+      top: '8px',
+      ...calculatePosition(props.position),
       flexDirection: 'column',
       maxWidth: '420px',
     }}
