@@ -1,7 +1,13 @@
 // Inspired by react-hot-toast library
 import * as React from 'react';
 import { dispatch, useStore } from './store';
-import { Toast, ToastArg, ToasterType, isFunction } from './types';
+import {
+  Toast,
+  ToastArg,
+  ToasterType,
+  ToastsOptions,
+  isFunction,
+} from './types';
 import { genId } from './utils';
 
 function createToast(type: ToasterType = 'default', arg: ToastArg): Toast {
@@ -57,7 +63,7 @@ toast.dismiss = (toastId?: string) => {
   });
 };
 
-const DEFAULT_DURATION = 1000;
+const DEFAULT_DURATION = 3 * 1000;
 
 const pause = () => {
   dispatch({
@@ -73,8 +79,8 @@ const resume = () => {
   });
 };
 
-function useToast() {
-  const { toasts, pausedAt, pauseDuration } = useStore();
+function useToast(toastOptions: ToastsOptions = {}) {
+  const { toasts, pausedAt, pauseDuration } = useStore(toastOptions);
 
   React.useEffect(() => {
     const timeouts = toasts.map((t) => {
@@ -87,8 +93,8 @@ function useToast() {
       }
 
       const durationLeft =
-        (t.duration || DEFAULT_DURATION) +
-        (pauseDuration || 0) -
+        (t.duration ?? DEFAULT_DURATION) +
+        (pauseDuration ?? 0) -
         (Date.now() - t.createdAt);
 
       if (durationLeft <= 0) {

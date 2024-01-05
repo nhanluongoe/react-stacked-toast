@@ -1,5 +1,5 @@
 import React from 'react';
-import { Toast } from './types';
+import { Toast, ToastsOptions } from './types';
 
 type ActionType = {
   ADD_TOAST: 'ADD_TOAST';
@@ -39,7 +39,7 @@ interface State {
 
 const toastTimeouts = new Map<Toast['id'], ReturnType<typeof setTimeout>>();
 
-export const TOAST_EXPIRE_DISMISS_DELAY = 10;
+export const TOAST_EXPIRE_DISMISS_DELAY = 0;
 const TOAST_LIMIT = 3;
 
 const addToRemoveQueue = (toastId: string) => {
@@ -143,7 +143,7 @@ export function dispatch(action: Action) {
   });
 }
 
-export const useStore = () => {
+export const useStore = (toastOptions: ToastsOptions = {}) => {
   const [state, setState] = React.useState<State>(memoryState);
 
   React.useEffect(() => {
@@ -156,7 +156,18 @@ export const useStore = () => {
     };
   }, [state]);
 
+  const mergedToasts = state.toasts.map((t) => ({
+    ...toastOptions,
+    ...t,
+    duration: t.duration ?? toastOptions?.duration,
+    style: {
+      ...toastOptions.style,
+      ...t.style,
+    },
+  }));
+
   return {
     ...state,
+    toasts: mergedToasts,
   };
 };

@@ -1,5 +1,6 @@
 import { setup } from 'goober';
 import React, { useEffect, useState } from 'react';
+import { ToastOptions } from '../core/types';
 import { pause, resume, useToast } from '../core/use-toast';
 import { Toast, ToastDescription, ToastTitle, ToastViewport } from './toast';
 import ToastIcon from './toast-icon';
@@ -8,12 +9,13 @@ setup(React.createElement);
 
 interface ToasterProps {
   position?: 'left' | 'center' | 'right';
+  toastOptions?: ToastOptions;
 }
 
 export const Toaster: React.FC<ToasterProps> = (props) => {
-  const { position = 'right' } = props;
+  const { position = 'right', toastOptions } = props;
 
-  const { toasts } = useToast();
+  const { toasts } = useToast(toastOptions);
   const [collapsed, setCollapsed] = useState(true);
 
   useEffect(() => {
