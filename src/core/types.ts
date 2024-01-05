@@ -13,9 +13,11 @@ export type Toast = {
   duration?: number; // miliseconds
   style?: CSSProperties;
 };
+
+export type ToastsOptions = Partial<
+  Pick<Toast, 'id' | 'icon' | 'duration' | 'style'>
+>;
 export type ToastOptions = Partial<Toast>;
-export type ToastOptionsWithoutType = Omit<ToastOptions, 'type'>;
-export type ToastOptionsWithoutTypeAndId = Omit<ToastOptionsWithoutType, 'id'>;
 
 export type ReactChildren =
   | React.JSX.Element
@@ -23,8 +25,6 @@ export type ReactChildren =
   | string
   | null;
 
-export type ToastArg =
-  | ToastOptionsWithoutType
-  | ((toast: Toast) => ToastOptionsWithoutTypeAndId);
+export type ToastArg = ToastOptions | ((toast: Toast) => ToastOptions);
 
 export const isFunction = (fn: any): fn is Function => typeof fn === 'function';
