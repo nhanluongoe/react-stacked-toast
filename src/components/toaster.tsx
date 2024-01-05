@@ -1,7 +1,10 @@
-import { useEffect, useState } from 'react';
+import { setup } from 'goober';
+import React, { useEffect, useState } from 'react';
 import { pause, resume, useToast } from '../core/use-toast';
 import { Toast, ToastDescription, ToastTitle, ToastViewport } from './toast';
 import ToastIcon from './toast-icon';
+
+setup(React.createElement);
 
 interface ToasterProps {
   position?: 'left' | 'center' | 'right';
@@ -35,30 +38,32 @@ export function Toaster(props: ToasterProps) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {toasts.map(({ id, title, description, type, icon, style }, index) => (
-        <Toast
-          key={id}
-          idx={index}
-          collapsed={collapsed.toString()}
-          style={style}
-        >
-          <div
-            style={{
-              display: 'flex',
-              gap: '1rem',
-              alignItems: 'center',
-            }}
+      {toasts.map(
+        ({ id, title, description, type, icon, style = {} }, index) => (
+          <Toast
+            key={id}
+            idx={index}
+            collapsed={collapsed.toString()}
+            style={style}
           >
-            <ToastIcon type={type} icon={icon} />
-            <div>
-              {title && <ToastTitle>{title}</ToastTitle>}
-              {description && (
-                <ToastDescription>{description}</ToastDescription>
-              )}
+            <div
+              style={{
+                display: 'flex',
+                gap: '1rem',
+                alignItems: 'center',
+              }}
+            >
+              <ToastIcon type={type} icon={icon} />
+              <div>
+                {title && <ToastTitle>{title}</ToastTitle>}
+                {description && (
+                  <ToastDescription>{description}</ToastDescription>
+                )}
+              </div>
             </div>
-          </div>
-        </Toast>
-      ))}
+          </Toast>
+        )
+      )}
     </ToastViewport>
   );
 }

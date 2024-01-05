@@ -1,9 +1,6 @@
-import { keyframes, setup, styled } from 'goober';
-import React from 'react';
+import { keyframes, styled } from 'goober';
 import { Toast } from '../core/types';
 import { Check, Close } from './icons';
-
-setup(React.createElement);
 
 interface ToastIconProps {
   icon?: Toast['icon'];

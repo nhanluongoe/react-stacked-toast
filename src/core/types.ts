@@ -15,3 +15,9 @@ export type Toast = {
 };
 export type ToastOptions = Partial<Toast>;
 export type ToastOptionsWithoutType = Omit<ToastOptions, 'type'>;
+
+export type ReactChildren =
+  | React.JSX.Element
+  | React.JSX.Element[]
+  | string
+  | null;
