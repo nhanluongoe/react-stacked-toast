@@ -1,7 +1,7 @@
 {
   "name": "react-stacked-toast",
   "description": "A stacked toast component for React",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Nhan Luong",
   "license": "MIT",
   "keywords": [
