@@ -11,9 +11,11 @@ const StyledCheck = styled('i')`
     border: 2px solid transparent;
     border-radius: 100px;
     color: #61d345;
+    border-color: #61d345;
   }
   &::after {
     color: #61d345;
+    border-color: #61d345;
     content: '';
     display: block;
     box-sizing: border-box;
