@@ -1,6 +1,6 @@
 {
   "name": "react-stacked-toast",
-  "description": "A simple stacked toast notification component for React",
+  "description": "A stacked toast component for React",
   "version": "0.0.0",
   "author": "Nhan Luong",
   "license": "MIT",
@@ -8,6 +8,7 @@
     "react",
     "toast",
     "stacked",
+    "stacked-toast",
     "notification"
   ],
   "repository": {
