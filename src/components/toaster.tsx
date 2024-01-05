@@ -1,13 +1,16 @@
-import { useEffect, useState } from 'react';
+import { setup } from 'goober';
+import React, { useEffect, useState } from 'react';
 import { pause, resume, useToast } from '../core/use-toast';
 import { Toast, ToastDescription, ToastTitle, ToastViewport } from './toast';
 import ToastIcon from './toast-icon';
+
+setup(React.createElement);
 
 interface ToasterProps {
   position?: 'left' | 'center' | 'right';
 }
 
-export function Toaster(props: ToasterProps) {
+export const Toaster: React.FC<ToasterProps> = (props) => {
   const { position = 'right' } = props;
 
   const { toasts } = useToast();
@@ -35,28 +38,32 @@ export function Toaster(props: ToasterProps) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {toasts.map(({ id, title, description, type, icon }, index) => (
-        <Toast key={id} idx={index} collapsed={collapsed.toString()}>
-          <div
-            style={{
-              display: 'flex',
-              gap: '0.5rem',
-              alignItems: 'center',
-            }}
+      {toasts.map(
+        ({ id, title, description, type, icon, style = {} }, index) => (
+          <Toast
+            key={id}
+            idx={index}
+            collapsed={collapsed.toString()}
+            style={style}
           >
-            <div>
+            <div
+              style={{
+                display: 'flex',
+                gap: '1rem',
+                alignItems: 'center',
+              }}
+            >
               <ToastIcon type={type} icon={icon} />
+              <div>
+                {title && <ToastTitle>{title}</ToastTitle>}
+                {description && (
+                  <ToastDescription>{description}</ToastDescription>
+                )}
+              </div>
             </div>
-
-            <div>
-              {title && <ToastTitle>{title}</ToastTitle>}
-              {description && (
-                <ToastDescription>{description}</ToastDescription>
-              )}
-            </div>
-          </div>
-        </Toast>
-      ))}
+          </Toast>
+        )
+      )}
     </ToastViewport>
   );
-}
+};

@@ -1,26 +1,51 @@
+import { keyframes, styled } from 'goober';
+import React from 'react';
 import { Toast } from '../core/types';
+import { Check, Close } from './icons';
 
 interface ToastIconProps {
   icon?: Toast['icon'];
   type: Toast['type'];
 }
 
-export default function ToastIcon(props: ToastIconProps) {
+const enter = keyframes`
+  from {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
+
+const AnimatedIconWrapper = styled('div')`
+  position: relative;
+  transform: scale(0.6);
+  opacity: 0.4;
+  min-width: 20px;
+  animation: ${enter} 0.3s 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    forwards;
+`;
+
+const ToastIcon: React.FC<ToastIconProps> = (props) => {
   const { icon, type } = props;
 
   if (icon !== undefined) {
-    return icon;
+    return <AnimatedIconWrapper>{icon}</AnimatedIconWrapper>;
   }
 
   const renderIcon = () => {
     if (type === 'success') {
-      return '✅';
+      return <Check />;
     }
     if (type === 'error') {
-      return '❌';
+      return <Close />;
     }
     return null;
   };
 
-  return <div>{renderIcon()}</div>;
-}
+  return <AnimatedIconWrapper>{renderIcon()}</AnimatedIconWrapper>;
+};
+
+export default ToastIcon;
