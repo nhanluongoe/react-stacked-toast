@@ -21,7 +21,8 @@ const Template: StoryFn<typeof Toaster> = () => {
         onClick={() => {
           toast({
             title: `Scheduled: Catch up ${count}`,
-            description: 'Friday, February 10, 2023 at 5:57 PM',
+            description:
+              'Friday, February 10, 2023 at 5:57 PM, lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
             duration: 60 * 1000,
           });
           setCount((prev) => prev + 1);
@@ -47,7 +48,7 @@ export const Success: StoryFn<typeof Toaster> = () => {
           toast.success({
             title: `Scheduled: Catch up ${count}`,
             description: 'Friday, February 10, 2023 at 5:57 PM',
-            duration: 3 * 1000,
+            duration: 60 * 1000,
           });
           setCount((prev) => prev + 1);
         }}
@@ -95,6 +96,115 @@ export const CustomIcon: StoryFn<typeof Toaster> = () => {
             description: 'Friday, February 10, 2023 at 5:57 PM',
             duration: 3 * 1000,
             icon: '👋',
+          });
+          setCount((prev) => prev + 1);
+        }}
+      >
+        Show Toast
+      </button>
+    </div>
+  );
+};
+
+export const DarkToast: StoryFn<typeof Toaster> = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <Toaster />
+      <button
+        type="button"
+        onClick={() => {
+          toast({
+            title: `Scheduled: Catch up ${count}`,
+            description: 'Friday, February 10, 2023 at 5:57 PM',
+            duration: 3 * 1000,
+            icon: '👋',
+            style: {
+              backgroundColor: '#333',
+              color: '#fff',
+            },
+          });
+          setCount((prev) => prev + 1);
+        }}
+      >
+        Show Toast
+      </button>
+    </div>
+  );
+};
+
+export const CustomToast: StoryFn<typeof Toaster> = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <Toaster />
+      <button
+        type="button"
+        onClick={() => {
+          toast((t) => {
+            console.log(t.id);
+            return {
+              title: <p>I feel dizzy! {count}</p>,
+              description: (
+                <span>
+                  Custom and <b>bold</b>
+                  <button type="button" onClick={() => toast.dismiss(t.id)}>
+                    Dismiss
+                  </button>
+                </span>
+              ),
+              duration: 100 * 10 * 1000,
+              icon: '😵‍💫',
+              style: {
+                backgroundColor: '#333',
+                color: '#fff',
+              },
+              id: '99',
+            };
+          });
+          setCount((prev) => prev + 1);
+        }}
+      >
+        Show Toast
+      </button>
+    </div>
+  );
+};
+
+export const GeneralOptions: StoryFn<typeof Toaster> = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <Toaster
+        toastOptions={{
+          icon: '😵‍💫',
+          duration: 100,
+          style: {
+            backgroundColor: '#333',
+            color: '#fff',
+          },
+        }}
+      />
+      <button
+        type="button"
+        onClick={() => {
+          toast((t) => {
+            console.log(t.id);
+            return {
+              title: <p>I feel dizzy! {count}</p>,
+              description: (
+                <span>
+                  Custom and <b>bold</b>
+                  <button type="button" onClick={() => toast.dismiss(t.id)}>
+                    Dismiss
+                  </button>
+                </span>
+              ),
+              duration: 0,
+            };
           });
           setCount((prev) => prev + 1);
         }}
