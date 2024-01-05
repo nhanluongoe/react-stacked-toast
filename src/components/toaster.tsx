@@ -10,7 +10,7 @@ interface ToasterProps {
   position?: 'left' | 'center' | 'right';
 }
 
-export function Toaster(props: ToasterProps) {
+export const Toaster: React.FC<ToasterProps> = (props) => {
   const { position = 'right' } = props;
 
   const { toasts } = useToast();
@@ -66,4 +66,4 @@ export function Toaster(props: ToasterProps) {
       )}
     </ToastViewport>
   );
-}
+};

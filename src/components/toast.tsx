@@ -67,6 +67,7 @@ const StyledToast = styled('li')`
   background: #fff;
   color: #363636;
   border-radius: 8px;
+  line-height: 1.3;
   padding: 16px;
   margin-bottom: 8px;
 `;
