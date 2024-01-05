@@ -4,9 +4,11 @@
 [![npm downloads](https://img.shields.io/npm/dm/react-stacked-toast.svg?style=flat-square)](https://www.npmjs.com/package/react-stacked-toast)
 [![npm license](https://img.shields.io/npm/l/react-stacked-toast.svg?style=flat-square)](https://www.npmjs.com/package/react-stacked-toast) -->
 
+Take a look at [Demo](https://nhanluongoe.me/os/react-stacked-toast)
+
 ## 🔥 Features
 
-<!-- - 📦 **Tiny**: ...to be updated  -->
+- 📦 **Tiny**: ~6kB gzipped
 
 - 🎨 **Customizable**: You can customize the toast notification by passing a React component
 
