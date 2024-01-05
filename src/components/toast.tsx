@@ -81,7 +81,7 @@ Toast.displayName = 'Toast';
 const ToastTitle: React.FC<HTMLProps<HTMLParagraphElement>> = (props) => (
   <p
     style={{
-      fontSize: '0.875rem',
+      fontSize: '1rem',
       fontWeight: 600,
       color: 'inherit',
       textAlign: 'left',
@@ -95,7 +95,7 @@ ToastTitle.displayName = 'ToastTitle';
 const ToastDescription: React.FC<HTMLProps<HTMLParagraphElement>> = (props) => (
   <p
     style={{
-      fontSize: '0.75rem',
+      fontSize: '0.875rem',
       color: 'inherit',
       textAlign: 'left',
       margin: 0,
