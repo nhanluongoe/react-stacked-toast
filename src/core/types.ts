@@ -15,9 +15,16 @@ export type Toast = {
 };
 export type ToastOptions = Partial<Toast>;
 export type ToastOptionsWithoutType = Omit<ToastOptions, 'type'>;
+export type ToastOptionsWithoutTypeAndId = Omit<ToastOptionsWithoutType, 'id'>;
 
 export type ReactChildren =
   | React.JSX.Element
   | React.JSX.Element[]
   | string
   | null;
+
+export type ToastArg =
+  | ToastOptionsWithoutType
+  | ((toast: Toast) => ToastOptionsWithoutTypeAndId);
+
+export const isFunction = (fn: any): fn is Function => typeof fn === 'function';

@@ -1,24 +1,42 @@
 // Inspired by react-hot-toast library
 import * as React from 'react';
-import { Toast, ToastOptionsWithoutType, ToasterType } from './types';
-import { genId } from './utils';
 import { dispatch, useStore } from './store';
+import { Toast, ToastArg, ToasterType, isFunction } from './types';
+import { genId } from './utils';
 
-function createToast(
-  type: ToasterType = 'default',
-  opts: ToastOptionsWithoutType
-): Toast {
+function createToast(type: ToasterType = 'default', arg: ToastArg): Toast {
+  if (isFunction(arg)) {
+    const id = genId();
+    const createdAt = Date.now();
+    const visible = true;
+
+    const expectedToast = arg({
+      type,
+      createdAt,
+      visible,
+      id,
+    });
+
+    return {
+      ...expectedToast,
+      type,
+      createdAt,
+      visible,
+      id,
+    };
+  }
+
   return {
     type,
     createdAt: Date.now(),
     visible: true,
-    ...opts,
-    id: opts.id || genId(),
+    ...arg,
+    id: arg.id || genId(),
   };
 }
 
 function createHandler(type?: ToasterType) {
-  return (options: ToastOptionsWithoutType) => {
+  return (options: ToastArg) => {
     const toast = createToast(type, options);
     dispatch({
       type: 'ADD_TOAST',
@@ -28,10 +46,9 @@ function createHandler(type?: ToasterType) {
   };
 }
 
-const toast = (opts: ToastOptionsWithoutType) => createHandler('default')(opts);
-toast.error = (opts: ToastOptionsWithoutType) => createHandler('error')(opts);
-toast.success = (opts: ToastOptionsWithoutType) =>
-  createHandler('success')(opts);
+const toast = (opts: ToastArg) => createHandler('default')(opts);
+toast.error = createHandler('error');
+toast.success = createHandler('success');
 
 toast.dismiss = (toastId?: string) => {
   dispatch({
@@ -98,4 +115,4 @@ function useToast() {
   };
 }
 
-export { toast, useToast, pause, resume };
+export { pause, resume, toast, useToast };

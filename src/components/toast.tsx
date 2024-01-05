@@ -103,7 +103,7 @@ function calculateAnimationStyle(
   };
 }
 
-const ToastTitle = styled('p')`
+const ToastTitle = styled('div')`
   font-size: 1rem;
   font-weight: 600;
   color: inherit;
@@ -112,7 +112,7 @@ const ToastTitle = styled('p')`
 `;
 ToastTitle.displayName = 'ToastTitle';
 
-const ToastDescription = styled('p')`
+const ToastDescription = styled('div')`
   font-size: 0.875rem;
   color: inherit;
   text-align: left;
