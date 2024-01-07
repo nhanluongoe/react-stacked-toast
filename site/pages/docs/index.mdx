@@ -1,0 +1,58 @@
+import Layout from '../../components/docs-layout';
+import toast from 'react-stacked-toast';
+
+export const meta = {
+  title: 'Documentation',
+};
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>;
+
+# Getting Started
+
+### Install with Yarn
+
+```sh
+yarn add react-stacked-toast
+```
+
+### Install with NPM
+
+```sh
+npm install react-stacked-toast
+```
+
+## Quick usage
+
+### 1. Add the `Toaster` component to your application
+
+```jsx
+import { Toaster } from 'react-stacked-toast';
+
+const App = () => {
+  return (
+    <Toaster />
+    // Other components
+  );
+};
+```
+
+### 2. Use the `toast` api to create a toast anywhere in your application
+
+```jsx
+import { toast } from 'react-stacked-toast';
+
+const Component = () => {
+  return (
+    <button
+      onClick={() => {
+        toast({
+          title: 'React Stacked Toast',
+          description: 'Here is your toast!',
+        });
+      }}
+    >
+      Show toast
+    </button>
+  );
+};
+```

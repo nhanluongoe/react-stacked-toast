@@ -1,0 +1,79 @@
+import Layout from '../../components/docs-layout';
+import toast from 'react-stacked-toast';
+
+export const meta = {
+  title: 'toast() API',
+};
+
+# `toast()` API
+
+## Available toast options
+
+These options will overwrite all options received from [`<Toaster/>`](/docs/toaster).
+
+```js
+toast({
+  title: 'Hello world!',
+  description: 'This is a toast notification.',
+  duration: 5000,
+  icon: '👋',
+  style: {
+    backgroundColor: '#333',
+    color: '#fff',
+  },
+});
+```
+
+| Options       | Type          | Description                                                             |
+| ------------- | ------------- | ----------------------------------------------------------------------- |
+| `title`       | ReactNode     | The title of the toast notification.                                    |
+| `description` | ReactNode     | The description of the toast notification.                              |
+| `duration`    | number        | The duration of the toast notification in milliseconds. Default is 3000 |
+| `icon`        | ReactNode     | The icon to be displayed in the toast notification.                     |
+| `style`       | CSSProperties | The custom styles for the toast notification.                           |
+
+## Usage
+
+```js
+// Make a tost
+toast({
+  title: 'Hello world!',
+});
+toast({
+  title: (
+    <span>
+      Custom and <b>bold</b>
+    </span>
+  ),
+});
+
+// Shortcut to built-in types
+toast.success({
+  title: 'Successfully created!',
+});
+toast.error({
+  title: 'This is an error!',
+});
+toast.custom({
+  title: <div>Hello World</div>,
+});
+
+// Dismiss a single toast
+const toastId = toast({ title: 'Hello world!' });
+toast.dismiss(toastId);
+
+//or
+toast((t) => ({
+  title: (
+    <span>
+      Custom and <b>bold</b>
+      <button onClick={() => toast.dismiss(t.id)}>Dismiss</button>
+    </span>
+  ),
+}));
+
+// Dismiss all toasts
+toast.dismiss();
+```
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>;

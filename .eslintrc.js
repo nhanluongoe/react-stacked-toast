@@ -66,5 +66,9 @@ module.exports = {
     ],
     'react/prop-types': 'off', // Disable react/prop-types rule
     'arrow-body-style': 'off', // Disable arrow-body-style rule
+    'global-require': 'off', // Disable global-require rule
+    'react/no-array-index-key': 'warn', // Disable react/no-array-index-key rule
+    'import/no-relative-packages': 'off', // Disable import/no-relative-parent-imports rule
+    'jsx-a11y/anchor-is-valid': 'off', // Disable jsx-a11y/anchor-is-valid rule
   },
 };

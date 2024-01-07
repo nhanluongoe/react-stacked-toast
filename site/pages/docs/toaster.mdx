@@ -1,0 +1,45 @@
+import Layout from '../../components/docs-layout';
+import toast from 'react-stacked-toast';
+
+export const meta = {
+  title: '<Toaster/> API',
+};
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>;
+
+# `<Toaster />` API
+
+## Available options
+
+```jsx
+<Toaster
+  position="right"
+  toastOptions={{
+    duration: 3 * 1000,
+    icon: '👋',
+    style: {
+      backgroundColor: '#333',
+      color: '#fff',
+    },
+  }}
+/>
+```
+
+| Props        | Type                          | Default | Description                                      |
+| ------------ | ----------------------------- | ------- | ------------------------------------------------ |
+| position     | 'right' \| 'center' \| 'left' | 'right' | The position of the toaster on the screen        |
+| toastOptions | object                        | \{\}    | Options for customizing the appearance of toasts |
+
+| Options    | Type          | Description                                                             |
+| ---------- | ------------- | ----------------------------------------------------------------------- |
+| `duration` | number        | The duration of the toast notification in milliseconds. Default is 3000 |
+| `icon`     | ReactNode     | The icon to be displayed in the toast notification.                     |
+| `style`    | CSSProperties | The custom styles for the toast notification.                           |
+
+## Usage
+
+```jsx
+import { Toaster } from 'react-stacked-toast';
+
+<Toaster />;
+```
