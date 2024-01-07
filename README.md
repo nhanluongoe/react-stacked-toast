@@ -66,9 +66,7 @@ const Component = () => {
 
 ## 🔧 API
 
-<!-- Find the full API reference on [official documentation](https://updatelater). -->
-
-Update later
+Full documentation can be found here on [react-stacked-toast](https://react-stacked-toast.vercel.app/).
 
 ## Acknowledgements
 
