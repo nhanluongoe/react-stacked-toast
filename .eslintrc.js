@@ -5,12 +5,7 @@ module.exports = {
     es2021: true,
     jest: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-    'prettier',
-    'plugin:storybook/recommended',
-  ],
+  extends: ['plugin:react/recommended', 'prettier'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -19,15 +14,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-    'typescript-sort-keys',
-    'unused-imports',
-    'prettier',
-    'prefer-arrow',
-    'sort-class-members',
-  ],
+  plugins: ['react', '@typescript-eslint', 'unused-imports', 'prettier'],
   rules: {
     '@typescript-eslint/no-unused-vars': 'error',
     'import/extensions': 'off',
