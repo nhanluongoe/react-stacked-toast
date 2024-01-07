@@ -36,21 +36,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'unused-imports/no-unused-imports': 'error',
     'prefer-arrow/prefer-arrow-functions': 'off',
-    'sort-class-members/sort-class-members': [
-      'error',
-      {
-        order: [
-          '[static-properties]',
-          '[properties]',
-          '[conventional-private-properties]',
-          'constructor',
-          '[static-methods]',
-          '[methods]',
-          '[conventional-private-methods]',
-        ],
-        accessorPairPositioning: 'getThenSet',
-      },
-    ],
     'react/prop-types': 'off', // Disable react/prop-types rule
     'arrow-body-style': 'off', // Disable arrow-body-style rule
     'global-require': 'off', // Disable global-require rule
