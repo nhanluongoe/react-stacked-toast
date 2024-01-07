@@ -11,3 +11,4 @@ yarn.lock
 .env.template
 public
 LICENSE
+*.svg
