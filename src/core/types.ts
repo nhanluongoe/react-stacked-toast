@@ -14,9 +14,7 @@ export type Toast = {
   style?: CSSProperties;
 };
 
-export type ToastsOptions = Partial<
-  Pick<Toast, 'id' | 'icon' | 'duration' | 'style'>
->;
+export type ToastsOptions = Partial<Pick<Toast, 'icon' | 'duration' | 'style'>>;
 export type ToastOptions = Partial<Toast>;
 
 export type ReactChildren =
