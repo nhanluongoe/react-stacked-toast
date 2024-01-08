@@ -59,6 +59,7 @@ export const ToasterExample: React.FC = () => {
         <div className="w-full grid grid-cols-5 gap-2  rounded-xl mb-4">
           {Examples.map((e) => (
             <button
+              key={e.snippet + e.title}
               className="rounded bg-white text-sm font-semibold py-2 px-2 shadow-small-button flex items-center justify-center"
               type="button"
               onClick={() => {
