@@ -65,7 +65,7 @@ const Steps = () => (
       code={
         <>
           <span className="text-toast-600">toast</span>
-          <span className="text-toast-800">(&quot;Hello World&quot;)</span>
+          <span className="text-toast-800">{`({title: "Wanna a toast?"})`}</span>
         </>
       }
     />
