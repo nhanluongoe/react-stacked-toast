@@ -13,7 +13,8 @@ interface ToasterProps {
 }
 
 export const Toaster: React.FC<ToasterProps> = (props) => {
-  const { position = 'right', toastOptions } = props;
+  const { position = 'right', toastOptions = {} } = props;
+  const { viewportStyle, viewportClassName } = toastOptions;
 
   const { toasts } = useToast(toastOptions);
   const [collapsed, setCollapsed] = useState(true);
@@ -39,6 +40,8 @@ export const Toaster: React.FC<ToasterProps> = (props) => {
       position={position}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      style={{ ...viewportStyle }}
+      className={viewportClassName}
     >
       {toasts.map(
         ({ id, title, description, type, icon, style = {} }, index) => (
