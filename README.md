@@ -4,9 +4,13 @@
 [![npm downloads](https://img.shields.io/npm/dm/react-stacked-toast.svg?style=flat-square)](https://www.npmjs.com/package/react-stacked-toast)
 [![npm license](https://img.shields.io/npm/l/react-stacked-toast.svg?style=flat-square)](https://www.npmjs.com/package/react-stacked-toast) -->
 
-<div style="text-align: center">
+<p align="center">
   <img src="./site/assets/logo.svg" alt="logo" style="">
-</div>
+</p>
+
+<p align="center" style="font-size: 28px">
+  When one toast is not enough, stack them up!
+</p>
 
 ## 🔥 Features
 
