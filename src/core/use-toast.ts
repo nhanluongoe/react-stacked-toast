@@ -10,6 +10,8 @@ import {
 } from './types';
 import { genId } from './utils';
 
+const DEFAULT_DURATION = 3 * 1000;
+
 function createToast(type: ToasterType = 'default', arg: ToastArg): Toast {
   if (isFunction(arg)) {
     const id = genId();
@@ -62,8 +64,6 @@ toast.dismiss = (toastId?: string) => {
     toastId,
   });
 };
-
-const DEFAULT_DURATION = 3 * 1000;
 
 const pause = () => {
   dispatch({
