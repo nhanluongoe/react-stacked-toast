@@ -1,5 +1,5 @@
 import React from 'react';
-import { styled } from 'goober';
+import { keyframes, styled } from 'goober';
 
 const StyledCheck = styled('i')`
   & {
@@ -67,4 +67,36 @@ const StyledClose = styled('i')`
 `;
 export const Close: React.FC = () => {
   return <StyledClose />;
+};
+
+const spinnerTwoAltAnimation = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+const StyledSpinner = styled('i')`
+  position: relative;
+  &,
+  &::before {
+    box-sizing: border-box;
+    display: block;
+    width: 30px;
+    height: 30px;
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    border-radius: 100px;
+    animation: ${spinnerTwoAltAnimation} 1s cubic-bezier(0.6, 0, 0.4, 1)
+      infinite;
+    border: 3px solid #5fbdff;
+    border-bottom-color: transparent;
+    border-top-color: transparent;
+  }
+`;
+export const Spinner: React.FC = () => {
+  return <StyledSpinner />;
 };

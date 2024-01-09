@@ -57,6 +57,7 @@ function createHandler(type?: ToasterType) {
 const toast = (opts: ToastArg) => createHandler('default')(opts);
 toast.error = createHandler('error');
 toast.success = createHandler('success');
+toast.loading = createHandler('loading');
 
 toast.dismiss = (toastId?: string) => {
   dispatch({
