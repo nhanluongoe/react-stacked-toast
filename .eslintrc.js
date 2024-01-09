@@ -43,4 +43,5 @@ module.exports = {
     'import/no-relative-packages': 'off', // Disable import/no-relative-parent-imports rule
     'jsx-a11y/anchor-is-valid': 'off', // Disable jsx-a11y/anchor-is-valid rule
   },
+  ignorePatterns: ['/site'], //ignore document site directory
 };
