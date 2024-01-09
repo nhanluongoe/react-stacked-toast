@@ -7,7 +7,7 @@ import ToastIcon from './toast-icon';
 
 setup(React.createElement);
 
-interface ToasterProps {
+export interface ToasterProps {
   position?: 'left' | 'center' | 'right';
   toastOptions?: ToastsOptions;
 }
