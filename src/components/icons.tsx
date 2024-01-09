@@ -44,6 +44,8 @@ const StyledClose = styled('i')`
     border: 2px solid transparent;
     border-radius: 40px;
     color: #ff4b4b;
+    border: 2px solid red;
+    border-radius: 9999px;
   }
   &::after,
   &::before {
@@ -56,8 +58,8 @@ const StyledClose = styled('i')`
     height: 3px;
     background: currentColor;
     transform: rotate(45deg);
-    top: 10px;
-    left: 4px;
+    top: 12px;
+    left: 3px;
   }
   &::after {
     transform: rotate(-45deg);
