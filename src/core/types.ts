@@ -16,7 +16,7 @@ export type Toast = {
 };
 
 export type ToastsOptions = Partial<
-  Pick<Toast, 'icon' | 'duration' | 'style'>
+  Pick<Toast, 'icon' | 'duration' | 'style' | 'className'>
 > & {
   viewportStyle?: CSSProperties;
   viewportClassName?: string;

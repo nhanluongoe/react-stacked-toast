@@ -44,12 +44,13 @@ export const Toaster: React.FC<ToasterProps> = (props) => {
       className={viewportClassName}
     >
       {toasts.map(
-        ({ id, title, description, type, icon, style = {} }, index) => (
+        ({ id, title, description, type, icon, style, className }, index) => (
           <Toast
             key={id}
             idx={index}
             collapsed={collapsed.toString()}
             style={style}
+            className={className}
           >
             <div
               style={{
