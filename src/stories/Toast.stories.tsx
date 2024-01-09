@@ -214,3 +214,63 @@ export const GeneralOptions: StoryFn<typeof Toaster> = () => {
     </div>
   );
 };
+
+export const CustomViewport: StoryFn<typeof Toaster> = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <Toaster
+        toastOptions={{
+          viewportStyle: {
+            border: '1px solid red',
+          },
+          viewportClassName: 'custom-viewport',
+        }}
+      />
+      <button
+        type="button"
+        onClick={() => {
+          toast({
+            title: `Scheduled: Catch up ${count}`,
+            description:
+              'Friday, February 10, 2023 at 5:57 PM, lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
+            duration: 60 * 1000,
+          });
+          setCount((prev) => prev + 1);
+        }}
+      >
+        Show Toast
+      </button>
+    </div>
+  );
+};
+
+export const CustomClassName: StoryFn<typeof Toaster> = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <Toaster
+        toastOptions={{
+          className: 'abc',
+        }}
+      />
+      <button
+        type="button"
+        onClick={() => {
+          toast({
+            title: `Scheduled: Catch up ${count}`,
+            description:
+              'Friday, February 10, 2023 at 5:57 PM, lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
+            duration: 60 * 1000,
+            className: 'def',
+          });
+          setCount((prev) => prev + 1);
+        }}
+      >
+        Show Toast
+      </button>
+    </div>
+  );
+};

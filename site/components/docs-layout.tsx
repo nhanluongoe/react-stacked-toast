@@ -48,9 +48,13 @@ export default function DocsLayout({ meta, children }) {
             <div className="flex flex-col mb-8 sticky top-0">
               <TableHeader>Overview</TableHeader>
               <TableItem href="/docs">Get Started</TableItem>
+
               <TableHeader>API</TableHeader>
               <TableItem href="/docs/toaster">Toaster</TableItem>
               <TableItem href="/docs/toast">toast()</TableItem>
+
+              <TableHeader>Guide</TableHeader>
+              <TableItem href="/docs/styling">Styling</TableItem>
             </div>
           </nav>
 

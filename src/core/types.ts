@@ -12,9 +12,16 @@ export type Toast = {
   icon?: React.ReactNode;
   duration?: number; // miliseconds
   style?: CSSProperties;
+  className?: string;
 };
 
-export type ToastsOptions = Partial<Pick<Toast, 'icon' | 'duration' | 'style'>>;
+export type ToastsOptions = Partial<
+  Pick<Toast, 'icon' | 'duration' | 'style' | 'className'>
+> & {
+  viewportStyle?: CSSProperties;
+  viewportClassName?: string;
+};
+
 export type ToastOptions = Partial<Toast>;
 
 export type ReactChildren =

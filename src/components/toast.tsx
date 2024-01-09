@@ -53,7 +53,8 @@ function calculatePosition(
 interface ToastProps {
   collapsed?: string;
   idx?: number;
-  style: CSSProperties;
+  style?: CSSProperties;
+  className?: string;
   children: ReactChildren;
 }
 
@@ -73,7 +74,7 @@ const StyledToast = styled('li')`
 `;
 
 const Toast: React.FC<ToastProps> = (props) => {
-  const { collapsed, idx, style, children } = props;
+  const { collapsed, idx, style = {}, children, className = '' } = props;
   const animationStyle = calculateAnimationStyle(idx!, collapsed!);
 
   return (
@@ -82,6 +83,7 @@ const Toast: React.FC<ToastProps> = (props) => {
         ...style,
         ...animationStyle,
       }}
+      className={className}
     >
       {children}
     </StyledToast>
