@@ -1,0 +1,55 @@
+import Layout from '../../components/docs-layout';
+import toast from 'react-stacked-toast';
+
+export const meta = {
+  title: 'Styling',
+};
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>;
+
+# Styling
+
+You can style your toast globally with `toastOptions` in `<Toaster/>` component or individually with `toast()` api.
+
+## Global styling
+
+You either can pass `style` or `className` to `toastOptions` to style your toast globally.
+
+```jsx
+<Toaster toastOptions={{
+  style: {
+    background: '#333',
+    color: '#fff',
+  },
+  className="border border-red"
+}} />
+```
+
+You also can style the viewport. Viewport is the container of all toasts.
+
+```jsx
+<Toaster
+  toastOptions={{
+    viewportStyle: {
+      border: '1px solid red',
+    },
+    viewportClassName: 'custom-viewport',
+  }}
+/>
+```
+
+## Individualy style
+
+You can pass `style` or `className` to `toast()` api to style your toast individually. This will override `toastOptions` styling in `<Toaster/>` component.
+
+```js
+toast({
+  title: 'Hello',
+  description: 'This is a toast',
+  style: {
+    background: '#333',
+    color: '#fff',
+  },
+  className="border border-red"
+})
+```
