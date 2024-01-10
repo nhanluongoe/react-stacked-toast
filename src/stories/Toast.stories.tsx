@@ -105,6 +105,30 @@ export const Loading: StoryFn<typeof Toaster> = () => {
   );
 };
 
+export const Warning: StoryFn<typeof Toaster> = () => {
+  return (
+    <div>
+      <Toaster
+        toastOptions={{
+          className: 'abc',
+          duration: 500 * 1000,
+        }}
+      />
+      <button
+        type="button"
+        onClick={() => {
+          toast.warning({
+            title: 'warning',
+            description: 'description',
+          });
+        }}
+      >
+        Show Toast
+      </button>
+    </div>
+  );
+};
+
 export const CustomIcon: StoryFn<typeof Toaster> = () => {
   const [count, setCount] = useState(0);
 
