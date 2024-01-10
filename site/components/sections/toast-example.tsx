@@ -27,6 +27,22 @@ toast.success({
     },
   },
   {
+    title: 'Loading',
+    emoji: '⏳',
+    snippet: `
+toast.loading({
+  title: 'Loading...',
+  description: 'We are making a toast.',
+});
+    `,
+    action: () => {
+      toast.loading({
+        title: 'Loading...',
+        description: 'We are making a toast.',
+      });
+    },
+  },
+  {
     title: 'Error',
     emoji: '❌',
     snippet: `
@@ -38,6 +54,22 @@ toast.error({
 
     action: () => {
       toast.error({ title: "This didn't work.", description: 'Try again.' });
+    },
+  },
+  {
+    title: 'Warning',
+    emoji: '⚠️',
+    snippet: `
+toast.warning({
+  title: 'Overcooked!',
+  description: 'Your toast is overcooked!',
+});
+    `,
+    action: () => {
+      toast.warning({
+        title: 'Overcooked!',
+        description: 'Your toast is overcooked!',
+      });
     },
   },
   {
@@ -101,7 +133,6 @@ toast((t) => ({
   ),
 }));
 `,
-
     action: () => {
       toast((t) => ({
         description: (
@@ -117,6 +148,28 @@ toast((t) => ({
           </span>
         ),
       }));
+    },
+  },
+  {
+    title: 'Promise',
+    emoji: '🤞',
+    snippet: `
+const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 3000));
+toast.promise(resolveAfter3Sec, {
+  loading: {title: 'Loading...', description: 'Waiting for 3 seconds.'},
+  success: {title: 'Success!', description: 'Your toast is ready.'},
+  error: {title: 'Error!', description: 'Your toast is burnt.'},
+})
+    `,
+    action: () => {
+      const resolveAfter3Sec = new Promise((resolve) =>
+        setTimeout(resolve, 3000)
+      );
+      toast.promise(resolveAfter3Sec, {
+        loading: { title: 'Loading...', description: 'Waiting for 3 seconds.' },
+        success: { title: 'Success!', description: 'Your toast is ready.' },
+        error: { title: 'Error!', description: 'Your toast is burnt.' },
+      });
     },
   },
 ];

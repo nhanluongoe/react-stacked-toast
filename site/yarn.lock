@@ -3584,10 +3584,10 @@ react-dom@^18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
-react-stacked-toast@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/react-stacked-toast/-/react-stacked-toast-0.0.3.tgz#2d18f0585d9f1aec24a6bbdfe500b3c946909fc5"
-  integrity sha512-8g8iN45zf361P51kh0SFnVJ4rjBet4Dh24C+uMqSM58m11yMxoHabYK9jYWOssckuoaAozG/jhhR4lH3WtAwzA==
+react-stacked-toast@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/react-stacked-toast/-/react-stacked-toast-0.0.6.tgz#e67ec6a60da45bc04c5cc2b358628c3004afe685"
+  integrity sha512-BokQ8heug4GUL6ssPqVIW/ERWjjfLoa8uU2M3AvK+iQuE0b7s7CMssEsp0X4vyFLUfY5iV8CjUTF/Rp4DRcE8Q==
   dependencies:
     goober "^2.1.13"
 

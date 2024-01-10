@@ -54,8 +54,35 @@ toast.success({
 toast.error({
   title: 'This is an error!',
 });
+toast.loading({
+  title: 'Loading...',
+  description: 'We are making a toast.',
+});
+toast.warning({
+  title: 'Overcooked!',
+  description: 'Your toast is overcooked!',
+});
 toast.custom({
   title: <div>Hello World</div>,
+});
+
+// Make a dark toast
+toast({
+  title: 'Why not a dark toast?',
+  icon: '👏',
+  style: {
+    borderRadius: '200px',
+    background: '#333',
+    color: '#fff',
+  },
+});
+
+// Promise
+const resolveAfter3Sec = new Promise((resolve) => setTimeout(resolve, 3000));
+toast.promise(resolveAfter3Sec, {
+  loading: { title: 'Loading...', description: 'Waiting for 3 seconds.' },
+  success: { title: 'Success!', description: 'Your toast is ready.' },
+  error: { title: 'Error!', description: 'Your toast is burnt.' },
 });
 
 // Dismiss a single toast
