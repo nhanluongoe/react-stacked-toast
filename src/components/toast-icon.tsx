@@ -1,7 +1,7 @@
 import { keyframes, styled } from 'goober';
 import React from 'react';
 import { Toast } from '../core/types';
-import { Check, Close, Spinner } from './icons';
+import { Check, Close, Spinner, Warning } from './icons';
 
 interface ToastIconProps {
   icon?: Toast['icon'];
@@ -44,6 +44,9 @@ const ToastIcon: React.FC<ToastIconProps> = (props) => {
     }
     if (type === 'loading') {
       return <Spinner />;
+    }
+    if (type === 'warning') {
+      return <Warning />;
     }
     return null;
   };

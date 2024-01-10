@@ -100,3 +100,41 @@ const StyledSpinner = styled('i')`
 export const Spinner: React.FC = () => {
   return <StyledSpinner />;
 };
+
+const StyledWarning = styled('i')`
+  & {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    width: 30px;
+    height: 30px;
+    border: 2px solid;
+    border-radius: 40px;
+    color: #f6d776;
+  }
+  &::after,
+  &::before {
+    content: '';
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 3px;
+    width: 3px;
+    background: currentColor;
+    left: 11.5px;
+    color: #f6d776;
+  }
+  &::after {
+    top: 4px;
+    height: 14px;
+  }
+  &::before {
+    height: 3px;
+    bottom: 3px;
+    width: 3px;
+    border-radius: 9999px;
+  }
+`;
+export const Warning: React.FC = () => {
+  return <StyledWarning />;
+};

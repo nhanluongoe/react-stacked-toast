@@ -1,6 +1,11 @@
 import React, { CSSProperties } from 'react';
 
-export type ToasterType = 'success' | 'error' | 'default' | 'loading';
+export type ToasterType =
+  | 'success'
+  | 'error'
+  | 'default'
+  | 'loading'
+  | 'warning';
 
 export type Toast = {
   id: string;
