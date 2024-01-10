@@ -1,10 +1,15 @@
 import React from 'react';
 import { Toast, ToastsOptions } from './types';
 
+export const TOAST_EXPIRE_DISMISS_DELAY = 1000;
+const TOAST_LIMIT = 3;
+
 type ActionType = {
   ADD_TOAST: 'ADD_TOAST';
   REMOVE_TOAST: 'REMOVE_TOAST';
   DISMISS_TOAST: 'DISMISS_TOAST';
+  UPSERT_TOAST: 'UPSERT_TOAST';
+  UPDATE_TOAST: 'UPDATE_TOAST';
   PAUSE: 'PAUSE';
   RESUME: 'RESUME';
 };
@@ -23,6 +28,14 @@ type Action =
       type: ActionType['REMOVE_TOAST'];
     }
   | {
+      type: ActionType['UPSERT_TOAST'];
+      toast: Toast;
+    }
+  | {
+      type: ActionType['UPDATE_TOAST'];
+      toast: Partial<Toast>;
+    }
+  | {
       type: ActionType['PAUSE'];
       time: number;
     }
@@ -38,9 +51,6 @@ interface State {
 }
 
 const toastTimeouts = new Map<Toast['id'], ReturnType<typeof setTimeout>>();
-
-export const TOAST_EXPIRE_DISMISS_DELAY = 0;
-const TOAST_LIMIT = 3;
 
 const addToRemoveQueue = (toastId: string) => {
   if (toastTimeouts.has(toastId)) {
@@ -58,6 +68,13 @@ const addToRemoveQueue = (toastId: string) => {
   toastTimeouts.set(toastId, timeout);
 };
 
+const clearFromRemoveQueue = (toastId: string) => {
+  const timeout = toastTimeouts.get(toastId);
+  if (timeout) {
+    clearTimeout(timeout);
+  }
+};
+
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'ADD_TOAST': {
@@ -70,7 +87,6 @@ export const reducer = (state: State, action: Action): State => {
     case 'DISMISS_TOAST': {
       const { toastId } = action;
 
-      // ! Side effects ! - This could be execrated into a dismissToast() action, but I'll keep it here for simplicity
       if (toastId) {
         addToRemoveQueue(toastId);
       } else {
@@ -104,6 +120,25 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         toasts: state.toasts.filter((t) => t.id !== toastId),
+      };
+    }
+
+    case 'UPSERT_TOAST':
+      const { toast } = action;
+      return state.toasts.find((t) => t.id === toast.id)
+        ? reducer(state, { type: 'UPDATE_TOAST', toast })
+        : reducer(state, { type: 'ADD_TOAST', toast });
+
+    case 'UPDATE_TOAST': {
+      if (action.toast.id) {
+        clearFromRemoveQueue(action.toast.id);
+      }
+
+      return {
+        ...state,
+        toasts: state.toasts.map((t) =>
+          t.id === action.toast.id ? { ...t, ...action.toast } : t
+        ),
       };
     }
 

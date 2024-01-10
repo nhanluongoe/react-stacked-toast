@@ -71,9 +71,56 @@ export const Error: StoryFn<typeof Toaster> = () => {
           toast.error({
             title: `Scheduled: Catch up ${count}`,
             description: 'Friday, February 10, 2023 at 5:57 PM',
-            duration: 3 * 1000,
+            duration: 300 * 1000,
           });
           setCount((prev) => prev + 1);
+        }}
+      >
+        Show Toast
+      </button>
+    </div>
+  );
+};
+
+export const Loading: StoryFn<typeof Toaster> = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <Toaster position="center" />
+      <button
+        type="button"
+        onClick={() => {
+          toast.loading({
+            title: `Scheduled: Catch up ${count}`,
+            description: 'Friday, February 10, 2023 at 5:57 PM',
+            duration: 300 * 1000,
+          });
+          setCount((prev) => prev + 1);
+        }}
+      >
+        Show Toast
+      </button>
+    </div>
+  );
+};
+
+export const Warning: StoryFn<typeof Toaster> = () => {
+  return (
+    <div>
+      <Toaster
+        toastOptions={{
+          className: 'abc',
+          duration: 500 * 1000,
+        }}
+      />
+      <button
+        type="button"
+        onClick={() => {
+          toast.warning({
+            title: 'warning',
+            description: 'description',
+          });
         }}
       >
         Show Toast
@@ -267,6 +314,43 @@ export const CustomClassName: StoryFn<typeof Toaster> = () => {
             className: 'def',
           });
           setCount((prev) => prev + 1);
+        }}
+      >
+        Show Toast
+      </button>
+    </div>
+  );
+};
+
+export const PromiseSupport: StoryFn<typeof Toaster> = () => {
+  return (
+    <div>
+      <Toaster
+        toastOptions={{
+          className: 'abc',
+          duration: 5 * 1000,
+        }}
+      />
+      <button
+        type="button"
+        onClick={() => {
+          const resolveAfter3Sec = new Promise((resolve) => {
+            setTimeout(() => {
+              resolve('resolved');
+            }, 2000);
+          });
+
+          toast.promise(resolveAfter3Sec, {
+            loading: {
+              title: 'loading',
+            },
+            success: {
+              title: 'success',
+            },
+            error: {
+              title: 'error',
+            },
+          });
         }}
       >
         Show Toast
