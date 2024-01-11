@@ -128,6 +128,7 @@
     "yaml": ">=2.2.2"
   },
   "dependencies": {
-    "goober": "^2.1.13"
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0"
   }
 }

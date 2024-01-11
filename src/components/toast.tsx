@@ -1,4 +1,4 @@
-import { styled } from 'goober';
+import styled from '@emotion/styled';
 import React, { CSSProperties, HTMLAttributes } from 'react';
 import { ReactChildren } from '../core/types';
 
