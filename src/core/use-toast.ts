@@ -81,6 +81,12 @@ toast.promise = <T>(
   return promise;
 };
 
+toast.remove = () => {
+  dispatch({
+    type: 'REMOVE_TOAST',
+  });
+};
+
 toast.dismiss = (toastId?: string) => {
   dispatch({
     type: 'DISMISS_TOAST',
