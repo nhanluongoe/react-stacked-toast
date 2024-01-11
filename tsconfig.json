@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "lib": ["dom", "esnext"],
     "declaration": true,
     "sourceMap": true,
@@ -9,7 +9,10 @@
     "moduleResolution": "node",
     "skipLibCheck": true,
     "strict": true,
-    "noEmit": true
+    "noEmit": true,
+    "types": ["@testing-library/jest-dom"],
+    "rootDir": "./src"
   },
+  "include": ["src", "types", "test"],
   "exclude": ["./site"]
 }
