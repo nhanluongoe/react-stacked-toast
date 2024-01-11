@@ -14,5 +14,5 @@
     "rootDir": "./src"
   },
   "include": ["src", "types", "test"],
-  "exclude": ["./site", "stories"]
+  "exclude": ["./site", "**/*.stories.tsx"]
 }
