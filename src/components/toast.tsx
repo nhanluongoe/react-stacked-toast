@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import React, { CSSProperties, HTMLAttributes } from 'react';
 import { ReactChildren } from '../core/types';
+import { keyframes } from '@emotion/react';
 
 interface ToastViewportProps {
   position: 'left' | 'center' | 'right';
@@ -51,6 +52,7 @@ function calculatePosition(
 }
 
 interface ToastProps {
+  visible?: boolean;
   collapsed?: string;
   idx?: number;
   style?: CSSProperties;
@@ -58,6 +60,14 @@ interface ToastProps {
   children: ReactChildren;
 }
 
+const fadeOut = keyframes`
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+`;
+const fadeIn = keyframes`
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+`;
 const StyledToast = styled('li')`
   display: flex;
   position: relative;
@@ -71,19 +81,29 @@ const StyledToast = styled('li')`
   line-height: 1.3;
   padding: 16px;
   margin-bottom: 8px;
+  animation: ${(props: ToastProps) => (props.visible ? fadeIn : fadeOut)} 0.4s
+    forwards cubic-bezier(0.06, 0.71, 0.55, 1);
 `;
 
 const Toast: React.FC<ToastProps> = (props) => {
-  const { collapsed, idx, style = {}, children, className = '' } = props;
+  const {
+    collapsed,
+    idx,
+    style = {},
+    children,
+    className = '',
+    visible,
+  } = props;
   const animationStyle = calculateAnimationStyle(idx!, collapsed!);
 
   return (
     <StyledToast
       style={{
-        ...style,
         ...animationStyle,
+        ...style,
       }}
       className={className}
+      visible={visible}
     >
       {children}
     </StyledToast>
