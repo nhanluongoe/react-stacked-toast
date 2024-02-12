@@ -84,7 +84,7 @@ export default function Home() {
   return (
     <div className="overflow-x-hidden">
       <NextSeo
-        title="react-stacked-toast "
+        title="react-stacked-toast - Stacked toast for React applications"
         description="When one toast isn't enough, stack them up!"
       />
 
