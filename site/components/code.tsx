@@ -5,6 +5,8 @@ import Highlight, {
   Language,
   PrismTheme,
 } from 'prism-react-renderer';
+import copy from 'copy-to-clipboard';
+import toast from 'react-stacked-toast';
 
 const theme: PrismTheme = {
   plain: {
@@ -109,6 +111,11 @@ export const Code: React.FC<{
 }> = (props) => {
   const language = props.language || 'jsx';
 
+  const handleCopy = () => {
+    copy(props.snippet);
+    toast.success({ title: 'Copied to clipboard!' });
+  };
+
   return (
     <Highlight
       {...defaultProps}
@@ -121,10 +128,17 @@ export const Code: React.FC<{
           className={clsx(
             props.className,
             className,
-            'h-full w-full rounded-lg p-4 overflow-x-auto flex flex-col items justify-center'
+            'h-full w-full rounded-lg p-4 overflow-x-auto flex flex-col items justify-center relative'
           )}
           style={style}
         >
+          <button
+            className="absolute right-5 top-5 border border-gray-50 rounded-md px-2"
+            onClick={handleCopy}
+          >
+            Copy
+          </button>
+
           {tokens.map((line, i) => {
             if (tokens.length - 1 === i && line[0].empty) {
               return null;
