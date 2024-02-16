@@ -13,6 +13,7 @@
     "@types/prismjs": "^1.26.0",
     "@vercel/analytics": "^0.1.5",
     "clsx": "^1.1.1",
+    "copy-to-clipboard": "^3.3.3",
     "next": "^12.2.1",
     "next-seo": "^5.4.0",
     "postcss": "^8.4.14",
