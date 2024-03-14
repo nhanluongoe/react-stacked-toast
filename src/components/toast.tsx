@@ -74,7 +74,7 @@ const StyledToast = styled('li')`
   justify-content: space-between;
   width: content-fit;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
-  transition: transform 0.35s cubic-bezier(0.06, 0.71, 0.55, 1.275);
+  transition: transform 0.35s ease;
   background: #fff;
   color: #363636;
   border-radius: 8px;
