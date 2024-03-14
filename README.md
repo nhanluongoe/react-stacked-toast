@@ -5,7 +5,9 @@
 [![npm license](https://img.shields.io/npm/l/react-stacked-toast.svg?style=flat-square)](https://www.npmjs.com/package/react-stacked-toast) -->
 
 <p align="center">
-  <img src="./site/assets/logo.svg" alt="logo" style="">
+<video width="480" height="360" controls>
+  <source src="./site/assets/demo.mp4" type="video/mp4">
+</video>
 </p>
 
 <p align="center" style="font-size: 28px">
