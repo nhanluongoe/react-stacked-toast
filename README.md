@@ -4,11 +4,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/react-stacked-toast.svg?style=flat-square)](https://www.npmjs.com/package/react-stacked-toast)
 [![npm license](https://img.shields.io/npm/l/react-stacked-toast.svg?style=flat-square)](https://www.npmjs.com/package/react-stacked-toast) -->
 
-<p align="center">
-<video width="480" height="360" controls>
-  <source src="./site/assets/demo.mp4" type="video/mp4">
-</video>
-</p>
+https://github.com/nhanluongoe/react-stacked-toast/assets/42910096/ad5cf539-0c47-4afb-a39b-6594a5337860
 
 <p align="center" style="font-size: 28px">
   When one toast is not enough, stack them up!
