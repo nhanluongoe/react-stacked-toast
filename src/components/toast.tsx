@@ -16,7 +16,7 @@ const StyledToastViewport = styled('ul')`
   padding: 8px;
   top: 8px;
   flex-direction: column;
-  max-width: 420px;
+  width: 320px;
 `;
 
 const ToastViewport: React.FC<
@@ -44,7 +44,7 @@ function calculatePosition(
 ): CSSProperties {
   const positions = {
     left: { left: '16px' },
-    right: { right: '16px' },
+    right: { right: '60px' },
     center: { left: '50%', transform: 'translateX(-50%)' },
   };
 
@@ -70,18 +70,18 @@ const fadeIn = keyframes`
 `;
 const StyledToast = styled('li')`
   display: flex;
-  position: relative;
+  position: absolute;
   justify-content: space-between;
-  width: content-fit;
+  width: 100%;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
-  transition: transform 0.35s ease;
+  transition: transform 0.5s ease;
   background: #fff;
   color: #363636;
   border-radius: 8px;
   line-height: 1.3;
   padding: 16px;
   margin-bottom: 8px;
-  animation: ${(props: ToastProps) => (props.visible ? fadeIn : fadeOut)} 0.4s
+  animation: ${(props: ToastProps) => (props.visible ? fadeIn : fadeOut)} 0.5s
     forwards cubic-bezier(0.06, 0.71, 0.55, 1);
 `;
 
@@ -117,11 +117,19 @@ function calculateAnimationStyle(
 ): CSSProperties {
   const transformValue =
     collapsed === 'true'
-      ? `scaleX(${1 - idx! * 0.05}) translateY(${-idx! * 95}%)`
-      : 'none';
+      ? `scaleX(${1 - idx * 0.05})`
+      : `translateY(${idx * 100}%)`;
+
+  // const transformValue =
+  //   collapsed === 'true'
+  //     ? `scaleX(${1 - idx! * 0.05}) translateY(${-idx! * 95}%)`
+  //     : 'none';
+  //
+  console.log(collapsed);
   return {
     zIndex: 5500 - idx!,
     transform: transformValue,
+    top: `${idx! * 8}px`,
   };
 }
 
