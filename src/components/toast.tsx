@@ -120,12 +120,6 @@ function calculateAnimationStyle(
       ? `scaleX(${1 - idx * 0.05})`
       : `translateY(${idx * 100}%)`;
 
-  // const transformValue =
-  //   collapsed === 'true'
-  //     ? `scaleX(${1 - idx! * 0.05}) translateY(${-idx! * 95}%)`
-  //     : 'none';
-  //
-  console.log(collapsed);
   return {
     zIndex: 5500 - idx!,
     transform: transformValue,
