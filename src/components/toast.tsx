@@ -123,7 +123,7 @@ function calculateAnimationStyle(
   return {
     zIndex: 5500 - idx!,
     transform: transformValue,
-    top: `${idx! * 8}px`,
+    top: `${idx! * 10}px`,
   };
 }
 
