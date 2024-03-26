@@ -59,6 +59,22 @@ export const Success: StoryFn<typeof Toaster> = () => {
   );
 };
 
+export const SimpleArg: StoryFn<typeof Toaster> = () => {
+  return (
+    <div>
+      <Toaster />
+      <button
+        type="button"
+        onClick={() => {
+          toast('Simple description');
+        }}
+      >
+        Show Toast
+      </button>
+    </div>
+  );
+};
+
 export const Error: StoryFn<typeof Toaster> = () => {
   const [count, setCount] = useState(0);
 
