@@ -35,6 +35,16 @@ function createToast(type: ToasterType = 'default', arg: ToastArg): Toast {
     };
   }
 
+  if (typeof arg === 'string') {
+    return {
+      type,
+      createdAt: Date.now(),
+      visible: true,
+      title: arg,
+      id: genId(),
+    };
+  }
+
   return {
     type,
     createdAt: Date.now(),

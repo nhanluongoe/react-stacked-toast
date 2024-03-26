@@ -35,6 +35,6 @@ export type ReactChildren =
   | string
   | null;
 
-export type ToastArg = ToastOptions | ((toast: Toast) => ToastOptions);
+export type ToastArg = ToastOptions | ((toast: Toast) => ToastOptions) | string;
 
 export const isFunction = (fn: any): fn is Function => typeof fn === 'function';
