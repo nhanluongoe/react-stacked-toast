@@ -2,6 +2,7 @@ import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import * as React from 'react';
 import { Footer } from './sections/footer';
+import GitHub from '../assets/github.svg';
 
 const TableItem: React.FC<{
   href: string;
@@ -35,11 +36,8 @@ export default function DocsLayout({ meta, children }) {
           <a href="/" className="font-bold text-2xl">
             react-stacked-toast
           </a>
-          <a
-            className="flex text-toast-600 underline"
-            href="https://github.com/nhanluongoe/react-stacked-toast"
-          >
-            GitHub
+          <a href="https://github.com/nhanluongoe/react-stacked-toast">
+            <GitHub />
           </a>
         </header>
 

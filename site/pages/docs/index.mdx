@@ -42,14 +42,22 @@ const App = () => {
 import { toast } from 'react-stacked-toast';
 
 const Component = () => {
+  const handleClick = () => {
+    // Quickly make a toast
+    toast("Here is your toast");
+
+    // Or need more customization
+    toast({
+      title: 'React Stacked Toast',
+      description: 'Here is your toast!',
+      icon: '🍞'
+      ...
+    });
+  }
+
   return (
     <button
-      onClick={() => {
-        toast({
-          title: 'React Stacked Toast',
-          description: 'Here is your toast!',
-        });
-      }}
+      onClick={handleClick}
     >
       Show toast
     </button>

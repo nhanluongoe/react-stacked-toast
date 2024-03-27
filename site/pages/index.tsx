@@ -65,7 +65,7 @@ const Steps = () => (
       code={
         <>
           <span className="text-toast-600">toast</span>
-          <span className="text-toast-800">{`({title: "Wanna a toast?"})`}</span>
+          <span className="text-toast-800">{`("Wanna a toast?")`}</span>
         </>
       }
     />
@@ -76,7 +76,7 @@ const Features = () => (
   <div className="my-12 grid gap-x-8 gap-y-5 grid-cols-2 md:grid-cols-3">
     <Feature>Easy to use</Feature>
     <Feature>Customizable</Feature>
-    <Feature>Tiny</Feature>
+    <Feature>Stackable</Feature>
   </div>
 );
 
