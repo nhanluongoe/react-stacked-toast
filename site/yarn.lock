@@ -3734,10 +3734,10 @@ react-is@^16.7.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-stacked-toast@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/react-stacked-toast/-/react-stacked-toast-0.0.7.tgz#eed1f447b0f2470ebe5e69cbcaf0221a8b616506"
-  integrity sha512-x6PcyPFif9rUMhVA5N5dwUxEr+q+OrkKFSIZYt/+7h7EmGwJ44FV9DyziDtmQSxJ58Qz+xv4QTppWGdRJjObfg==
+react-stacked-toast@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/react-stacked-toast/-/react-stacked-toast-0.0.8.tgz#2905a1e300906d8b9655b9d70a14c7f866fd269c"
+  integrity sha512-WDJZ4JDBoL+GzGhhBDOXpzjgagBSyL+LMpD4JY5yb4ugF/vyD0fVMqEJFYqtlvxUFIKrZpHxot7BWJj225Rd/g==
   dependencies:
     "@emotion/react" "^11.11.3"
     "@emotion/styled" "^11.11.0"
@@ -3956,6 +3956,7 @@ stable@^0.1.8:
   integrity sha512-ji9qxRnOVfcuLDySj9qzhGSEFVobyt1kIOSkj1qZzYLzq7Tos/oUUWvotUPQLlrsidqsK6tBH89Bc9kL5zHA6w==
 
 "string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0:
+  name string-width-cjs
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
