@@ -12,7 +12,9 @@ https://github.com/nhanluongoe/react-stacked-toast/assets/42910096/ad5cf539-0c47
 
 ## 🔥 Features
 
-- 📦 **Tiny**: ~6kB gzipped
+- 📦 **Stackable**: Toast notifications are able to stack up on top of each other
+
+- 🎯 **Simple**: Easy to use APIs with minimal setup
 
 - 🎨 **Customizable**: You can customize the toast notification by passing a React component
 
@@ -51,18 +53,20 @@ const App = () => {
 import { toast } from 'react-stacked-toast';
 
 const Component = () => {
-  return (
-    <button
-      onClick={() => {
-        toast({
-          title: 'React Stacked Toast',
-          description: 'Here is your toast!',
-        });
-      }}
-    >
-      Show toast
-    </button>
-  );
+  const handleClick = () => {
+    // Quickly make a toast
+    toast('Here is your toast!');
+
+    // Or need more customization
+    toast({
+      title: 'React Stacked Toast',
+      description: 'Here is your toast!',
+      icon: '🍞',
+      ...
+    });
+  };
+
+  return <button onClick={handleClick}>Show toast</button>;
 };
 ```
 
