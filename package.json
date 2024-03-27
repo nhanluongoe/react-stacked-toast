@@ -9,7 +9,8 @@
     "toast",
     "stacked",
     "stacked-toast",
-    "notification"
+    "notification",
+    "alert"
   ],
   "repository": {
     "type": "git",
