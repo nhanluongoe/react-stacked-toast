@@ -74,11 +74,11 @@ const Component = () => {
 
 Full documentation can be found here on [react-stacked-toast](https://react-stacked-toast.vercel.app/).
 
-## Acknowledgements
+## 🙏 Acknowledgements
 
 This project is inspired by [react-hot-toast](https://github.com/timolins/react-hot-toast)
 
-## Report a bug or request a feature
+## 🪲 Report a bug or request a feature
 
 If you find a bug or want to request a feature, please open an issue [here](https://github.com/nhanluongoe/react-stacked-toast/issues/new/choose)
 
@@ -86,6 +86,6 @@ If you find a bug or want to request a feature, please open an issue [here](http
 
 If you like this project, please consider giving it a star on GitHub. Thank you!
 
-## LICENSE
+## 🪪 LICENSE
 
 License under [MIT](./LICENSE)
