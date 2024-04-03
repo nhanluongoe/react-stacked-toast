@@ -78,6 +78,14 @@ Full documentation can be found here on [react-stacked-toast](https://react-stac
 
 This project is inspired by [react-hot-toast](https://github.com/timolins/react-hot-toast)
 
+## Report a bug or request a feature
+
+If you find a bug or want to request a feature, please open an issue [here](https://github.com/nhanluongoe/react-stacked-toast/issues/new/choose)
+
+## 🌟 Show your support
+
+If you like this project, please consider giving it a star on GitHub. Thank you!
+
 ## LICENSE
 
 License under [MIT](./LICENSE)
