@@ -22,7 +22,7 @@ export function Footer() {
         {' · '}
         <span>
           <span>Built by </span>
-          <a className="underline" href="https://nhanluongoe.me">
+          <a className="underline" href="https://nhanluong.dev">
             Nhan Luong
           </a>
         </span>
