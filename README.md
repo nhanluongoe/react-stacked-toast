@@ -82,9 +82,9 @@ This project is inspired by [react-hot-toast](https://github.com/timolins/react-
 
 If you find a bug or want to request a feature, please open an issue [here](https://github.com/nhanluongoe/react-stacked-toast/issues/new/choose)
 
-## 🌟 Show your support
+## 🌟 Support
 
-If you like this project, please consider giving it a star on GitHub. Thank you!
+If you like this project, please consider giving it a star on GitHub. It's a huge encouragement for me. Thank you!
 
 ## 🪪 LICENSE
 
