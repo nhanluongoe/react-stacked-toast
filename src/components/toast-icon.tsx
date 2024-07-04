@@ -52,6 +52,10 @@ const ToastIcon: React.FC<ToastIconProps> = (props) => {
     return null;
   };
 
+  const hasIcon = renderIcon() !== null;
+
+  if (!hasIcon) return null;
+
   return <AnimatedIconWrapper>{renderIcon()}</AnimatedIconWrapper>;
 };
 

@@ -60,7 +60,7 @@ export const Toaster: React.FC<ToasterProps> = (props) => {
                 alignItems: 'center',
               }}
             >
-              {icon && <ToastIcon type={type} icon={icon} />}
+              <ToastIcon type={type} icon={icon} />
               <div>
                 {title && <ToastTitle>{title}</ToastTitle>}
                 {description && (
