@@ -10,9 +10,8 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
-    "types": ["@testing-library/jest-dom"],
-    "rootDir": "./src"
+    "types": ["@testing-library/jest-dom"]
   },
-  "include": ["src", "types", "test"],
+  "include": ["src", "types", "tests"],
   "exclude": ["./site", "**/*.stories.tsx"]
 }
