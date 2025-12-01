@@ -30,11 +30,12 @@ export default ({ children }) => <Layout meta={meta}>{children}</Layout>;
 | position     | 'right' \| 'center' \| 'left' | 'right' | The position of the toaster on the screen        |
 | toastOptions | object                        | \{\}    | Options for customizing the appearance of toasts |
 
-| Options    | Type          | Description                                                             |
-| ---------- | ------------- | ----------------------------------------------------------------------- |
-| `duration` | number        | The duration of the toast notification in milliseconds. Default is 3000 |
-| `icon`     | ReactNode     | The icon to be displayed in the toast notification.                     |
-| `style`    | CSSProperties | The custom styles for the toast notification.                           |
+| Options      | Type          | Description                                                             |
+| ------------ | ------------- | ----------------------------------------------------------------------- |
+| `duration`   | number        | The duration of the toast notification in milliseconds. Default is 3000 |
+| `icon`       | ReactNode     | The icon to be displayed in the toast notification.                     |
+| `style`      | CSSProperties | The custom styles for the toast notification.                           |
+| `toastLimit` | number        | The maximum number of visible toasts. Default is 3.                     |
 
 ## Usage
 
