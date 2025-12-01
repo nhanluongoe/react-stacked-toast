@@ -374,3 +374,27 @@ export const PromiseSupport: StoryFn<typeof Toaster> = () => {
     </div>
   );
 };
+
+export const CustomLimit: StoryFn<typeof Toaster> = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <Toaster toastOptions={{ toastLimit: 5 }} />
+      <button
+        type="button"
+        onClick={() => {
+          toast({
+            title: `Scheduled: Catch up ${count}`,
+            description:
+              'Friday, February 10, 2023 at 5:57 PM, lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
+            duration: 60 * 1000,
+          });
+          setCount((prev) => prev + 1);
+        }}
+      >
+        Show Toast
+      </button>
+    </div>
+  );
+};

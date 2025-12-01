@@ -85,6 +85,22 @@ it('renders only 3 toasts stacking correctly', () => {
   expect(screen.queryByText(/success/i)).not.toBeInTheDocument();
 });
 
+it('renders custom limit of toasts correctly', () => {
+  render(<Toaster toastOptions={{ toastLimit: 4 }} />);
+
+  act(() => {
+    toast.success({ title: 'Success!' });
+    toast.error({ title: 'Error!' });
+    toast.warning({ title: 'Warning!' });
+    toast.loading({ title: 'Loading' });
+  });
+
+  expect(screen.getByText(/loading/i)).toBeInTheDocument();
+  expect(screen.getByText(/error/i)).toBeInTheDocument();
+  expect(screen.getByText(/warning/i)).toBeInTheDocument();
+  expect(screen.getByText(/success/i)).toBeInTheDocument();
+});
+
 it('renders toasts with custom icon correctly', () => {
   render(<Toaster />);
 

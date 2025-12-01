@@ -2,7 +2,6 @@ import React from 'react';
 import { Toast, ToastsOptions } from './types';
 
 export const TOAST_EXPIRE_DISMISS_DELAY = 1000;
-const TOAST_LIMIT = 3;
 
 type ActionType = {
   ADD_TOAST: 'ADD_TOAST';
@@ -12,6 +11,7 @@ type ActionType = {
   UPDATE_TOAST: 'UPDATE_TOAST';
   PAUSE: 'PAUSE';
   RESUME: 'RESUME';
+  UPDATE_TOAST_LIMIT: 'UPDATE_TOAST_LIMIT';
 };
 
 type Action =
@@ -42,12 +42,17 @@ type Action =
   | {
       type: ActionType['RESUME'];
       time: number;
+    }
+  | {
+      type: ActionType['UPDATE_TOAST_LIMIT'];
+      toastLimit: number;
     };
 
 interface State {
   toasts: Toast[];
   pausedAt: number | undefined;
   pauseDuration: number | undefined;
+  toastLimit?: number;
 }
 
 const toastTimeouts = new Map<Toast['id'], ReturnType<typeof setTimeout>>();
@@ -80,7 +85,7 @@ export const reducer = (state: State, action: Action): State => {
     case 'ADD_TOAST': {
       return {
         ...state,
-        toasts: [action.toast, ...state.toasts].slice(0, TOAST_LIMIT),
+        toasts: [action.toast, ...state.toasts].slice(0, state.toastLimit),
       };
     }
 
@@ -158,6 +163,13 @@ export const reducer = (state: State, action: Action): State => {
       };
     }
 
+    case 'UPDATE_TOAST_LIMIT': {
+      return {
+        ...state,
+        toastLimit: action.toastLimit,
+      };
+    }
+
     default:
       return state;
   }
@@ -169,6 +181,7 @@ let memoryState: State = {
   toasts: [],
   pausedAt: undefined,
   pauseDuration: undefined,
+  toastLimit: 3,
 };
 
 export function dispatch(action: Action) {
@@ -190,6 +203,13 @@ export const useStore = (toastOptions: ToastsOptions = {}) => {
       }
     };
   }, [state]);
+
+  React.useEffect(() => {
+    dispatch({
+      type: 'UPDATE_TOAST_LIMIT',
+      toastLimit: toastOptions.toastLimit ?? 3,
+    });
+  }, [toastOptions.toastLimit]);
 
   const mergedToasts = state.toasts.map((t) => ({
     ...toastOptions,

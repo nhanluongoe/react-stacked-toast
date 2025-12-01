@@ -25,6 +25,7 @@ export type ToastsOptions = Partial<
 > & {
   viewportStyle?: CSSProperties;
   viewportClassName?: string;
+  toastLimit?: number;
 };
 
 export type ToastOptions = Partial<Toast>;
