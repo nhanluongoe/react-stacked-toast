@@ -48,7 +48,7 @@ type Action =
       toastLimit: number;
     };
 
-interface State {
+export interface State {
   toasts: Toast[];
   pausedAt: number | undefined;
   pauseDuration: number | undefined;
@@ -191,7 +191,7 @@ export function dispatch(action: Action) {
   });
 }
 
-export const useStore = (toastOptions: ToastsOptions = {}) => {
+export const useStore = (toastOptions: ToastsOptions = {}): State => {
   const [state, setState] = React.useState<State>(memoryState);
 
   React.useEffect(() => {
