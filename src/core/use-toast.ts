@@ -118,7 +118,29 @@ const resume = () => {
   });
 };
 
-function useToast(toastOptions: ToastsOptions = {}) {
+export type ToastHandler = {
+  (opts: ToastArg): string;
+  error: (opts: ToastArg) => string;
+  success: (opts: ToastArg) => string;
+  loading: (opts: ToastArg) => string;
+  warning: (opts: ToastArg) => string;
+  promise: <T>(
+    promise: Promise<T>,
+    content: {
+      loading: ToastOptions;
+      success: ToastOptions;
+      error: ToastOptions;
+    }
+  ) => Promise<T>;
+  remove: () => void;
+  dismiss: (toastId?: string) => void;
+};
+
+function useToast(toastOptions: ToastsOptions = {}): {
+  toasts: Toast[];
+  toast: ToastHandler;
+  dismiss: (toastId?: string) => void;
+} {
   const { toasts, pausedAt, pauseDuration } = useStore(toastOptions);
 
   React.useEffect(() => {
