@@ -69,6 +69,24 @@ it('renders stacked toasts correctly', () => {
   expect(screen.getByText(/warning/i)).toBeInTheDocument();
 });
 
+it('updates every mounted toaster from the shared store', () => {
+  render(
+    <>
+      <Toaster />
+      <Toaster />
+    </>
+  );
+
+  act(() => {
+    toast.success({
+      title: 'Shared toast',
+      duration: Infinity,
+    });
+  });
+
+  expect(screen.getAllByText(/shared toast/i)).toHaveLength(2);
+});
+
 it('renders only 3 toasts stacking correctly', () => {
   render(<Toaster />);
 
