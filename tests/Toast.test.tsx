@@ -1,18 +1,34 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import {
+  act,
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+} from '@testing-library/react';
 import React from 'react';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import toast, { Toaster } from '../src';
 
+let now = 1000;
+
+const advanceToastTime = (ms: number) => {
+  now += ms;
+  vi.advanceTimersByTime(ms);
+};
+
 beforeEach(() => {
+  cleanup();
   toast.remove();
-  vi.useFakeTimers();
+  now = 1000;
+  vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+  vi.spyOn(Date, 'now').mockImplementation(() => now);
 });
 
 afterEach(() => {
-  act(() => {
-    vi.runAllTimers();
-    vi.useRealTimers();
-  });
+  toast.remove();
+  cleanup();
+  vi.useRealTimers();
+  vi.restoreAllMocks();
 });
 
 it('renders success toast correctly', () => {
@@ -139,15 +155,19 @@ it('pause toasts correctly', () => {
   const toastElement = screen.getByText(/hover/i);
   expect(toastElement).toBeInTheDocument();
 
-  fireEvent.mouseEnter(toastElement);
   act(() => {
-    vi.advanceTimersByTime(60 * 1000);
+    fireEvent.mouseEnter(toastElement);
+  });
+  act(() => {
+    advanceToastTime(60 * 1000);
   });
   expect(toastElement).toBeInTheDocument();
 
-  fireEvent.mouseLeave(toastElement);
   act(() => {
-    vi.advanceTimersByTime(5 * 1000);
+    fireEvent.mouseLeave(toastElement);
+  });
+  act(() => {
+    advanceToastTime(5 * 1000);
   });
   expect(toastElement).not.toBeInTheDocument();
 });
@@ -167,20 +187,20 @@ it('removes a toast after dismissing an updated toast with the same id', () => {
 
   act(() => {
     toast.dismiss('same-toast');
-    vi.advanceTimersByTime(500);
+    advanceToastTime(500);
     toast.success({
       id: 'same-toast',
       title: 'Done',
       duration: Infinity,
     });
-    vi.advanceTimersByTime(1000);
+    advanceToastTime(1000);
   });
 
   expect(screen.getByText(/done/i)).toBeInTheDocument();
 
   act(() => {
     toast.dismiss('same-toast');
-    vi.advanceTimersByTime(1000);
+    advanceToastTime(1000);
   });
 
   expect(screen.queryByText(/done/i)).not.toBeInTheDocument();
@@ -199,37 +219,37 @@ it('preserves duration across multiple pauses', () => {
   const toastElement = screen.getByText(/multiple pauses/i);
 
   act(() => {
-    vi.advanceTimersByTime(1000);
+    advanceToastTime(1000);
   });
   act(() => {
     fireEvent.mouseEnter(toastElement);
   });
   act(() => {
-    vi.advanceTimersByTime(1000);
+    advanceToastTime(1000);
   });
   act(() => {
     fireEvent.mouseLeave(toastElement);
   });
   act(() => {
-    vi.advanceTimersByTime(1000);
+    advanceToastTime(1000);
   });
   act(() => {
     fireEvent.mouseEnter(toastElement);
   });
   act(() => {
-    vi.advanceTimersByTime(1000);
+    advanceToastTime(1000);
   });
   act(() => {
     fireEvent.mouseLeave(toastElement);
   });
   act(() => {
-    vi.advanceTimersByTime(999);
+    advanceToastTime(999);
   });
 
   expect(toastElement).toBeInTheDocument();
 
   act(() => {
-    vi.advanceTimersByTime(1001);
+    advanceToastTime(1001);
   });
 
   expect(toastElement).not.toBeInTheDocument();

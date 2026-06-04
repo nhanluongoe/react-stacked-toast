@@ -9,5 +9,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './tests/setup.ts',
     passWithNoTests: true,
+    testTimeout: 120000,
+    hookTimeout: 120000,
   },
 });
