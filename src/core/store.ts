@@ -196,7 +196,7 @@ export const reducer = (state: State, action: Action): State => {
   }
 };
 
-const listeners: Array<(state: State) => void> = [];
+const listeners: Array<() => void> = [];
 
 let memoryState: State = {
   toasts: [],
@@ -204,25 +204,43 @@ let memoryState: State = {
   toastLimit: 3,
 };
 
+const subscribe = (listener: () => void) => {
+  listeners.push(listener);
+  return () => {
+    const index = listeners.indexOf(listener);
+    if (index > -1) {
+      listeners.splice(index, 1);
+    }
+  };
+};
+
+const getSnapshot = () => memoryState;
+
+// React 18+ uses the built-in hook; React 17 falls back to the same
+// subscribe/snapshot contract so the peer dependency range remains supported.
+const useStoreSnapshot: typeof React.useSyncExternalStore =
+  React.useSyncExternalStore ??
+  ((subscribeToStore, getStoreSnapshot) => {
+    const [state, setState] = React.useState(getStoreSnapshot);
+
+    React.useEffect(() => {
+      return subscribeToStore(() => {
+        setState(getStoreSnapshot());
+      });
+    }, [getStoreSnapshot, subscribeToStore]);
+
+    return state;
+  });
+
 export function dispatch(action: Action) {
   memoryState = reducer(memoryState, action);
   listeners.forEach((listener) => {
-    listener(memoryState);
+    listener();
   });
 }
 
 export const useStore = (toastOptions: ToastsOptions = {}): State => {
-  const [state, setState] = React.useState<State>(memoryState);
-
-  React.useEffect(() => {
-    listeners.push(setState);
-    return () => {
-      const index = listeners.indexOf(setState);
-      if (index > -1) {
-        listeners.splice(index, 1);
-      }
-    };
-  }, [state]);
+  const state = useStoreSnapshot(subscribe, getSnapshot, getSnapshot);
 
   React.useEffect(() => {
     dispatch({
