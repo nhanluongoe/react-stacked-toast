@@ -141,7 +141,7 @@ function useToast(toastOptions: ToastsOptions = {}): {
   toast: ToastHandler;
   dismiss: (toastId?: string) => void;
 } {
-  const { toasts, pausedAt, pauseDuration } = useStore(toastOptions);
+  const { toasts, pausedAt } = useStore(toastOptions);
 
   React.useEffect(() => {
     const timeouts = toasts.map((t) => {
@@ -154,9 +154,7 @@ function useToast(toastOptions: ToastsOptions = {}): {
       }
 
       const durationLeft =
-        (t.duration ?? DEFAULT_DURATION) +
-        (pauseDuration ?? 0) -
-        (Date.now() - t.createdAt);
+        (t.duration ?? DEFAULT_DURATION) - (Date.now() - t.createdAt);
 
       if (durationLeft <= 0) {
         if (t.visible) {
@@ -173,7 +171,7 @@ function useToast(toastOptions: ToastsOptions = {}): {
     return () => {
       timeouts.forEach((timeout) => timeout && clearTimeout(timeout));
     };
-  }, [toasts, pausedAt, pauseDuration]);
+  }, [toasts, pausedAt]);
 
   return {
     toasts,

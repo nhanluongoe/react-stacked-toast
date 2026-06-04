@@ -51,7 +51,6 @@ type Action =
 export interface State {
   toasts: Toast[];
   pausedAt: number | undefined;
-  pauseDuration: number | undefined;
   toastLimit?: number;
 }
 
@@ -78,6 +77,14 @@ const clearFromRemoveQueue = (toastId: string) => {
   if (timeout) {
     clearTimeout(timeout);
   }
+  toastTimeouts.delete(toastId);
+};
+
+const clearRemoveQueue = () => {
+  toastTimeouts.forEach((timeout) => {
+    clearTimeout(timeout);
+  });
+  toastTimeouts.clear();
 };
 
 export const reducer = (state: State, action: Action): State => {
@@ -117,11 +124,14 @@ export const reducer = (state: State, action: Action): State => {
       const { toastId } = action;
 
       if (toastId === undefined) {
+        clearRemoveQueue();
         return {
           ...state,
           toasts: [],
         };
       }
+
+      clearFromRemoveQueue(toastId);
       return {
         ...state,
         toasts: state.toasts.filter((t) => t.id !== toastId),
@@ -148,6 +158,10 @@ export const reducer = (state: State, action: Action): State => {
     }
 
     case 'PAUSE': {
+      if (state.pausedAt !== undefined) {
+        return state;
+      }
+
       return {
         ...state,
         pausedAt: action.time,
@@ -155,11 +169,18 @@ export const reducer = (state: State, action: Action): State => {
     }
 
     case 'RESUME': {
-      const pauseDuration = action.time - (state.pausedAt || 0);
+      if (state.pausedAt === undefined) {
+        return state;
+      }
+
+      const pauseDuration = action.time - state.pausedAt;
       return {
         ...state,
         pausedAt: undefined,
-        pauseDuration,
+        toasts: state.toasts.map((toast) => ({
+          ...toast,
+          createdAt: toast.createdAt + pauseDuration,
+        })),
       };
     }
 
@@ -180,7 +201,6 @@ const listeners: Array<(state: State) => void> = [];
 let memoryState: State = {
   toasts: [],
   pausedAt: undefined,
-  pauseDuration: undefined,
   toastLimit: 3,
 };
 
