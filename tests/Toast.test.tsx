@@ -133,3 +133,86 @@ it('pause toasts correctly', () => {
   });
   expect(toastElement).not.toBeInTheDocument();
 });
+
+it('removes a toast after dismissing an updated toast with the same id', () => {
+  render(<Toaster />);
+
+  act(() => {
+    toast.loading({
+      id: 'same-toast',
+      title: 'Working',
+      duration: Infinity,
+    });
+  });
+
+  expect(screen.getByText(/working/i)).toBeInTheDocument();
+
+  act(() => {
+    toast.dismiss('same-toast');
+    vi.advanceTimersByTime(500);
+    toast.success({
+      id: 'same-toast',
+      title: 'Done',
+      duration: Infinity,
+    });
+    vi.advanceTimersByTime(1000);
+  });
+
+  expect(screen.getByText(/done/i)).toBeInTheDocument();
+
+  act(() => {
+    toast.dismiss('same-toast');
+    vi.advanceTimersByTime(1000);
+  });
+
+  expect(screen.queryByText(/done/i)).not.toBeInTheDocument();
+});
+
+it('preserves duration across multiple pauses', () => {
+  render(<Toaster />);
+
+  act(() => {
+    toast({
+      title: 'Multiple pauses',
+      duration: 3000,
+    });
+  });
+
+  const toastElement = screen.getByText(/multiple pauses/i);
+
+  act(() => {
+    vi.advanceTimersByTime(1000);
+  });
+  act(() => {
+    fireEvent.mouseEnter(toastElement);
+  });
+  act(() => {
+    vi.advanceTimersByTime(1000);
+  });
+  act(() => {
+    fireEvent.mouseLeave(toastElement);
+  });
+  act(() => {
+    vi.advanceTimersByTime(1000);
+  });
+  act(() => {
+    fireEvent.mouseEnter(toastElement);
+  });
+  act(() => {
+    vi.advanceTimersByTime(1000);
+  });
+  act(() => {
+    fireEvent.mouseLeave(toastElement);
+  });
+  act(() => {
+    vi.advanceTimersByTime(999);
+  });
+
+  expect(toastElement).toBeInTheDocument();
+
+  act(() => {
+    vi.advanceTimersByTime(1001);
+  });
+
+  expect(toastElement).not.toBeInTheDocument();
+});
