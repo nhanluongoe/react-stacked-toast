@@ -1,6 +1,5 @@
-import styled from '@emotion/styled';
-import { keyframes } from '@emotion/react';
 import React from 'react';
+import { keyframes, styled } from '../core/goober';
 
 const StyledCheck = styled('i')`
   & {
