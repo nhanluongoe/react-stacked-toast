@@ -1,46 +1,75 @@
 import Layout from '../../components/docs-layout';
-import toast from 'react-stacked-toast';
 
 export const meta = {
-  title: '<Toaster/> API',
+  title: '<Toaster /> API',
 };
 
 export default ({ children }) => <Layout meta={meta}>{children}</Layout>;
 
 # `<Toaster />` API
 
+Render one `<Toaster />` near the root of your application. It subscribes to toast state and displays the active stack.
+
+## Import
+
+```jsx
+import { Toaster } from 'react-stacked-toast/toaster';
+```
+
+You can also import `Toaster` from the root package:
+
+```jsx
+import { Toaster } from 'react-stacked-toast';
+```
+
 ## Available options
 
 ```jsx
+import { Toaster } from 'react-stacked-toast/toaster';
+
 <Toaster
   position="right"
   toastOptions={{
     duration: 3 * 1000,
     icon: '👋',
+    toastLimit: 3,
     style: {
       backgroundColor: '#333',
       color: '#fff',
     },
+    className: 'toast',
+    viewportStyle: {
+      top: 24,
+    },
+    viewportClassName: 'toast-viewport',
   }}
-/>
+/>;
 ```
 
-| Props        | Type                          | Default | Description                                      |
-| ------------ | ----------------------------- | ------- | ------------------------------------------------ |
-| position     | 'right' \| 'center' \| 'left' | 'right' | The position of the toaster on the screen        |
-| toastOptions | object                        | \{\}    | Options for customizing the appearance of toasts |
+| Prop           | Type                            | Default   | Description                                      |
+| -------------- | ------------------------------- | --------- | ------------------------------------------------ |
+| `position`     | `'right' \| 'center' \| 'left'` | `'right'` | The position of the toaster on the screen.       |
+| `toastOptions` | object                          | `{}`      | Options for customizing the appearance of toasts |
 
-| Options      | Type          | Description                                                             |
-| ------------ | ------------- | ----------------------------------------------------------------------- |
-| `duration`   | number        | The duration of the toast notification in milliseconds. Default is 3000 |
-| `icon`       | ReactNode     | The icon to be displayed in the toast notification.                     |
-| `style`      | CSSProperties | The custom styles for the toast notification.                           |
-| `toastLimit` | number        | The maximum number of visible toasts. Default is 3.                     |
+| `toastOptions` option | Type          | Description                                                 |
+| --------------------- | ------------- | ----------------------------------------------------------- |
+| `duration`            | number        | The duration of each toast in milliseconds. Default is 3000 |
+| `icon`                | ReactNode     | The default icon for toast notifications.                   |
+| `style`               | CSSProperties | Inline styles applied to each toast.                        |
+| `className`           | string        | A class name applied to each toast.                         |
+| `toastLimit`          | number        | The maximum number of visible toasts. Default is 3.         |
+| `viewportStyle`       | CSSProperties | Inline styles applied to the toast viewport.                |
+| `viewportClassName`   | string        | A class name applied to the toast viewport.                 |
 
 ## Usage
 
 ```jsx
-import { Toaster } from 'react-stacked-toast';
+import { Toaster } from 'react-stacked-toast/toaster';
 
-<Toaster />;
+export const App = () => (
+  <>
+    <Toaster position="right" />
+    {/* Other components */}
+  </>
+);
 ```
