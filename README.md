@@ -18,6 +18,8 @@ https://github.com/nhanluongoe/react-stacked-toast/assets/42910096/ad5cf539-0c47
 
 - 🎨 **Customizable**: You can customize the toast notification by passing a React component
 
+- 🪶 **Small**: Published package is about 9.9 kB packed with optional subpath exports for focused imports
+
 ## 🏃 Getting started
 
 Using npm:
