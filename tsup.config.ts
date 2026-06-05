@@ -17,7 +17,7 @@ export default defineConfig([
         js: '"use client";',
       };
     },
-    entry: ['src/index.ts'],
+    entry: ['src/index.ts', 'src/toast.ts', 'src/toaster.ts'],
     outDir: 'dist',
   },
 ]);

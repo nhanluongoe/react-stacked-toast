@@ -34,8 +34,19 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "require": "./dist/index.js",
       "import": "./dist/index.mjs"
+    },
+    "./toast": {
+      "types": "./dist/toast.d.ts",
+      "require": "./dist/toast.js",
+      "import": "./dist/toast.mjs"
+    },
+    "./toaster": {
+      "types": "./dist/toaster.d.ts",
+      "require": "./dist/toaster.js",
+      "import": "./dist/toaster.mjs"
     }
   },
   "files": [
