@@ -1,5 +1,4 @@
 import Layout from '../../components/docs-layout';
-import toast from 'react-stacked-toast';
 
 export const meta = {
   title: 'toast() API',
@@ -7,11 +6,25 @@ export const meta = {
 
 # `toast()` API
 
-## Available toast options
+Use `toast()` to create, update, dismiss, and remove notifications.
 
-These options will overwrite all options received from [`<Toaster/>`](/docs/toaster).
+## Import
 
 ```js
+import toast from 'react-stacked-toast/toast';
+```
+
+You can also import `toast` from the root package:
+
+```js
+import { toast } from 'react-stacked-toast';
+```
+
+## Available toast options
+
+Per-toast options override matching options received from [`<Toaster />`](/docs/toaster).
+
+```jsx
 toast({
   title: 'Hello world!',
   description: 'This is a toast notification.',
@@ -21,24 +34,33 @@ toast({
     backgroundColor: '#333',
     color: '#fff',
   },
+  className: 'toast-dark',
 });
 ```
 
-| Options       | Type          | Description                                                             |
+| Option        | Type          | Description                                                             |
 | ------------- | ------------- | ----------------------------------------------------------------------- |
+| `id`          | string        | Reuse an existing id to update that toast.                              |
 | `title`       | ReactNode     | The title of the toast notification.                                    |
 | `description` | ReactNode     | The description of the toast notification.                              |
 | `duration`    | number        | The duration of the toast notification in milliseconds. Default is 3000 |
 | `icon`        | ReactNode     | The icon to be displayed in the toast notification.                     |
-| `style`       | CSSProperties | The custom styles for the toast notification.                           |
+| `style`       | CSSProperties | Inline styles for the toast notification.                               |
+| `className`   | string        | A class name for the toast notification.                                |
+
+Set `duration` to `Infinity` to keep a toast visible until it is dismissed.
 
 ## Usage
 
-```js
-// Make a tost
+### Basic toast
+
+```jsx
+toast('Hello world!');
+
 toast({
   title: 'Hello world!',
 });
+
 toast({
   title: (
     <span>
@@ -46,8 +68,11 @@ toast({
     </span>
   ),
 });
+```
 
-// Shortcut to built-in types
+### Built-in types
+
+```js
 toast.success({
   title: 'Successfully created!',
 });
@@ -62,11 +87,11 @@ toast.warning({
   title: 'Overcooked!',
   description: 'Your toast is overcooked!',
 });
-toast.custom({
-  title: <div>Hello World</div>,
-});
+```
 
-// Make a dark toast
+### Custom styling
+
+```js
 toast({
   title: 'Why not a dark toast?',
   icon: '👏',
@@ -75,21 +100,35 @@ toast({
     background: '#333',
     color: '#fff',
   },
+  className: 'toast-dark',
 });
+```
 
-// Promise
+### Promise states
+
+```js
 const resolveAfter3Sec = new Promise((resolve) => setTimeout(resolve, 3000));
 toast.promise(resolveAfter3Sec, {
   loading: { title: 'Loading...', description: 'Waiting for 3 seconds.' },
   success: { title: 'Success!', description: 'Your toast is ready.' },
   error: { title: 'Error!', description: 'Your toast is burnt.' },
 });
+```
 
-// Dismiss a single toast
+### Dismiss toasts
+
+```js
 const toastId = toast({ title: 'Hello world!' });
 toast.dismiss(toastId);
 
-//or
+toast.dismiss();
+```
+
+### Render from the current toast
+
+Pass a function when the content needs access to the generated toast id.
+
+```jsx
 toast((t) => ({
   title: (
     <span>
@@ -98,9 +137,12 @@ toast((t) => ({
     </span>
   ),
 }));
+```
 
-// Dismiss all toasts
-toast.dismiss();
+### Remove all toasts immediately
+
+```js
+toast.remove();
 ```
 
 export default ({ children }) => <Layout meta={meta}>{children}</Layout>;

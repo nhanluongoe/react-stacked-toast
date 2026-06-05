@@ -1,7 +1,6 @@
-import styled from '@emotion/styled';
 import React, { CSSProperties, HTMLAttributes } from 'react';
+import { keyframes, styled } from '../core/goober';
 import { ReactChildren } from '../core/types';
-import { keyframes } from '@emotion/react';
 
 interface ToastViewportProps {
   position: 'left' | 'center' | 'right';
@@ -81,8 +80,6 @@ const StyledToast = styled('li')`
   line-height: 1.3;
   padding: 16px;
   margin-bottom: 8px;
-  animation: ${(props: ToastProps) => (props.visible ? fadeIn : fadeOut)} 0.5s
-    forwards cubic-bezier(0.06, 0.71, 0.55, 1);
 `;
 
 const Toast: React.FC<ToastProps> = (props) => {
@@ -100,10 +97,12 @@ const Toast: React.FC<ToastProps> = (props) => {
     <StyledToast
       style={{
         ...animationStyle,
+        animation: `${
+          visible ? fadeIn : fadeOut
+        } 0.5s forwards cubic-bezier(0.06, 0.71, 0.55, 1)`,
         ...style,
       }}
       className={className}
-      visible={visible}
     >
       {children}
     </StyledToast>

@@ -1,5 +1,4 @@
 import Layout from '../../components/docs-layout';
-import toast from 'react-stacked-toast';
 
 export const meta = {
   title: 'Documentation',
@@ -8,6 +7,8 @@ export const meta = {
 export default ({ children }) => <Layout meta={meta}>{children}</Layout>;
 
 # Getting Started
+
+React Stacked Toast gives you a small toast store and a single `<Toaster />` component for rendering stacked notifications.
 
 ### Install with Yarn
 
@@ -30,37 +31,41 @@ import { Toaster } from 'react-stacked-toast';
 
 const App = () => {
   return (
-    <Toaster />
-    // Other components
+    <>
+      <Toaster />
+      {/* Other components */}
+    </>
   );
 };
 ```
 
-### 2. Use the `toast` api to create a toast anywhere in your application
+### 2. Use the `toast` API anywhere in your application
 
 ```jsx
 import { toast } from 'react-stacked-toast';
 
 const Component = () => {
   const handleClick = () => {
-    // Quickly make a toast
-    toast("Here is your toast");
+    toast('Here is your toast!');
 
-    // Or need more customization
     toast({
       title: 'React Stacked Toast',
       description: 'Here is your toast!',
-      icon: '🍞'
-      ...
+      icon: '🍞',
     });
-  }
+  };
 
-  return (
-    <button
-      onClick={handleClick}
-    >
-      Show toast
-    </button>
-  );
+  return <button onClick={handleClick}>Show toast</button>;
 };
+```
+
+## Package size
+
+The current build is about **9.9 kB packed** and **43.3 kB unpacked** based on `npm pack --dry-run`.
+
+The root import remains supported. If you prefer more focused entry points, you can import the toast API and toaster component separately:
+
+```jsx
+import toast from 'react-stacked-toast/toast';
+import { Toaster } from 'react-stacked-toast/toaster';
 ```
